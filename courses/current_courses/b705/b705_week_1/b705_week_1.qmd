@@ -32,7 +32,10 @@ execute:
 ### Thursday
 
 
+#### Linear Regression Review
 
+* Simple linear regression model:
+    - $Y = \beta_0 + \beta_1 X + \epsilon$
 
 
 
