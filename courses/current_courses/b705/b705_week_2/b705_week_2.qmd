@@ -1,0 +1,135 @@
+---
+title: "B704 - Week 1 Lecture Notes"
+date: "January 11, 2024"
+author: "Austin Allen"
+format:
+  html:
+    self-contained: true
+    page-layout: full
+    title-block-banner: true
+    toc: true
+    toc-depth: 3
+    toc-location: body
+    number-sections: false
+    html-math-method: katex
+    code-fold: true
+    code-summary: "Show the code"
+    code-overflow: wrap
+    code-copy: hover
+    code-tools:
+        source: false
+        toggle: true
+        caption: See code
+execute: 
+  warning: false
+    
+---
+
+
+
+::: {.panel-tabset}
+
+### Tuesday
+
+
+#### Linear Regression Review
+
+* The goal of linear regression is to reduce variance. We could use $\bar{Y}$ if we wanted, but if there is a relationship between the *explanatory* variable and the *response* variable, we can reduce the unexplained variability by including $X$ in the model 
+* Simple linear regression model:
+    - $Y = \beta_0 + \beta_1 X + \epsilon$
+      - This is the population line
+    - Linear regression model is linear in parameters. This means that $log(Y) = \beta_0 + \beta_1 \sqrt{X} + \epsilon$ is still linear, but $Y = \beta_0 + \sqrt{\beta_1 X} + \epsilon$ is not linear 
+    -$\beta_1$ is the expected change in $Y$ for a one-unit change in $X$
+* Degrees of freedom
+  - We lose 1 degree of freedom for every parameter we estimate. Why? I believe it's because when calculating a sample statistic (like $\bar{X}$), we suddenly only need $n- 1$ number of our data points to gain all the information we had. Thus, it's as if some of our data were consumed in the calculation
+  - Another possibility is that it is because calculating a parameter creates less "wiggle room" in our data, thus limiting our flexibility by a degree of freedom. In fact, that may be what the term "degrees of freedom" is actually referring to
+
+* Residuals
+  - $\epsilon$ represents the distance from the observed value, $Y_i$, to the corresponding point on the true population line, $E(Y_i)$. In our data, we estimate $E(Y_i)$ with $\hat{Y_i}$, which is the corresponding y-value on the estimated line, $\beta_0 + \beta_1 x$. 
+* Least squares
+    - The first question to ask when you see an outlier is whether the datum is correct. You can sometimes ask if 
+* Other tips
+    - Avoid dichotemizing unless it's necessary. You lose information, so unless there's a good reason for it, avoid it
+    - If you fail to reject the null hypothesis when testing whether $\beta_1 = 0$, the inference is that there is no linear relationship between $X$ and $Y$
+```{r}
+library(tidyverse)
+
+Obs <- c(1,2,3,4,5,6,7,8,9)
+Age <- c(19,25,30,42,26,52,57,62,70)
+SBP <- c(122,125,126,129,130,135,138,142,145)
+
+
+df <- data.frame(Obs = Obs, Age = Age, SBP = SBP)
+
+ggplot(df, aes(x = Age, y = SBP)) +
+    geom_point(col = "navy", size = 5) +
+    geom_smooth(method = "lm", se = FALSE, col = "firebrick") +
+    labs(title = "Example Linear Regression with Age and SBP")
+    theme_bw()
+
+fitA <- lm(Age ~ SBP)
+fitB <- lm(SBP ~ Age)
+print(summary(fitA))
+print(summary(fitB))
+
+```
+
+
+
+* Assume: 
+    - Linearity: $Y = \beta_0 + \beta_1 X + \epsilon$
+    - $X$'s are fixed constants
+    - $\epsilon_i \sim^{\text{i.i.d.}} N(0,\sigma^2)$
+    - Constant variance
+    - Normality assumption is *not* needed to estimate linear regression parameters.However, normality is needed to make 
+* The least squares approach leads to below $\hat{\beta_0}$ and $\hat{\beta_1}$ that minimize the RSS, $\hat{\beta_0} = \bar{Y} - 
+    - PLEASE UPDATE THIS AT HOME
+    - Estimate $\beta_0$:
+    - Estimate $\beta_1$:
+    - Estimate $\sigma^2$:
+    - Estimate $\epsilon_i$:
+    - Estimate $Var(\hat{\beta_0})$:
+    - Estimate $Var(\hat{\beta_1})$:
+* $g = \frac{\hat{\beta_1} - \beta_{01}}{}
+
+
+
+* When we calculate the $t$ statistic, 
+    
+
+
+  
+### Foundation of Statistics
+
+* What is the statistician's responsibility in a RCT?
+    - Is sample size appropriate?
+    - Is study design appropriate? 
+* Randomize Control Trial Tidbits
+    - It's often unethical to randomize individuals to a control. 
+
+* Sampling and Randomization
+    - All parameters are unknown    
+        - $\mu$
+        - $N$
+        - $\sigma^2$
+        - $\pi$
+    - How do we estimate the parameters? We draw a sample
+    - Suppose we know $N$. We can see with even a simple example that if our population size is 1,000, and if we draw a sample of 100, there are ${1000 \choose 100}$ combinations. That's a huge number. But what if there were 10,000 individuals? 100,000? 
+    - We sample, and we rely on the sample data to estimate our parameters. The best estimate for $\mu$ is $\bar{X}$. Similarly, here are some other best estimates:
+        - $E(\bar{X}) = \mu$
+        - $E(S^2) = \sigma^2$
+        - $E(\hat{\pi}) = \pi$
+    - $\bar{X}$ is a consistent estimator. This means that $\bar{X}$ *converges* to $\mu$. This is also true for $S^2 \rightarrow \sigma^2$
+    - It's important to note that these sample statistics
+    - Statistics are random variables
+* Power
+    - The FDA threshhold for power is 80%
+    - Often the investigator will not have the budget to include the amount of individuals needed for a given trial. What options are there to reduce the required sample size?
+        - Can we appropriately reduce the power of the study?
+        - Can we appropriately change the assumptions?
+
+
+
+
+
+:::

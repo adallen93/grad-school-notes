@@ -1,0 +1,96 @@
+---
+title: "B704 - Week 1 Lecture Notes"
+date: "January 16, 2024"
+author: "Austin Allen"
+format:
+  html:
+    self-contained: true
+    page-layout: full
+    title-block-banner: true
+    toc: true
+    toc-depth: 3
+    toc-location: body
+    number-sections: false
+    html-math-method: katex
+    code-fold: true
+    code-summary: "Show the code"
+    code-overflow: wrap
+    code-copy: hover
+    code-tools:
+        source: false
+        toggle: true
+        caption: See code
+execute: 
+  warning: false
+    
+---
+
+
+
+::: {.panel-tabset}
+
+### Tuesday
+
+
+#### Lecture Notes
+
+
+#### Problem 1
+
+$X_1, ... , X_n$ is a random sample with $X_i \sim Pareto(1,1)$. Let $Yn$ represent the maximum, $max(X_1, ... , X_n)$. Let $Gn(Y)$ represent the CDF of $Yn$. Does $Yn$ converge in distribution? 
+
+\begin{align*}
+Gn(Y) &= P(X_{n:n} \le y)\\
+&= P(X_1 \le y, ... , X_n \le y)\\
+&= P(X_1 \le y) \cdot ... \cdot P(X_n \le y)\\
+&= [P(X_1 \le y)]^2\\
+&= [F_x(Y)]^n\\
+F_X(Y) &= \left\{
+    \begin{array}{ll}
+        [1 - (1 + Y)^{-1}]^n & \text{if } y > 0 \\
+        0 & \text{if } y \le 0
+    \end{array}
+\right.\\
+\lim_{n \to \infty} [1 - (1 + Y)^{-1}]^n &= \lim_{n \to \infty} [1 - \frac{1}{1 + y}]^n\\
+&= \lim_{n \to \infty} [\frac{Y}{1 + Y}]^n\\
+\text{Note: for all y >0} &\text{,} y + 1 > y\\
+\text{Thus, } 0 &< \frac{y}{y + 1} < 1\\
+\lim_{n \to \infty} \frac{Y}{1 + Y} &= 0\\
+\text{This is not a CDF because } &\lim_{n \to \infty} G(Y) \ne 1
+\end{align*}
+
+
+
+
+#### Problem 2
+
+This was a very similar problem to the last one, but we used the minimum of an sample of random exponential variables. I'll write this problem out if I have time. 
+
+
+#### Problem 3
+
+
+
+$X_1, ... , X_n$ is a random sample with $X_i \sim N(\mu, \sigma^2)$. Let $Yn$ represent $\bar{X}$, $\frac{1}{n} \sum_{i = 1}^{n} X_i$. Let $M_{X_i}(t)$ represent the MGF of $Yn$. Does $Yn$ converge in distribution? 
+
+We're going to approach this problem by looking at the MGF of a normal distribution. Note that $X_i \overbrace{\sim}^{i.i.d.} N(\mu, \sigma^2) \implies \bar{X} \sim N(\mu, \sigma^2)$
+
+
+
+
+
+
+
+
+
+
+
+
+### Thursday
+
+
+
+
+
+
+:::

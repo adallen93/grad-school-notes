@@ -34,12 +34,19 @@ execute:
 
 #### Linear Regression Review
 
+* The goal of linear regression is to reduce variance. We could use $\bar{Y}$ if we wanted, but if there is a relationship between the *explanatory* variable and the *response* variable, we can reduce the unexplained variability by including $X$ in the model 
 * Simple linear regression model:
     - $Y = \beta_0 + \beta_1 X + \epsilon$
+      - This is the population line
+    - Linear regression model is linear in parameters. This means that $log(Y) = \beta_0 + \beta_1 \sqrt{X} + \epsilon$ is still linear, but $Y = \beta_0 + \sqrt{\beta_1 X} + \epsilon$ is not linear 
+    -$\beta_1$ is the expected change in $Y$ for a one-unit change in $X$
+* Degrees of freedom
+  - We lose 1 degree of freedom for every parameter we estimate. Why? I believe it's because when calculating a sample statistic (like $\bar{X}$), we suddenly only need $n- 1$ number of our data points to gain all the information we had. Thus, it's as if some of our data were consumed in the calculation
+  - Another possibility is that it is because calculating a parameter creates less "wiggle room" in our data, thus limiting our flexibility by a degree of freedom. In fact, that may be what the term "degrees of freedom" is actually referring to
 
-
-
-
+* Residuals
+  - $\epsilon$ represents the distance from the observed value, $Y_i$, to the corresponding point on the true population line, $E(Y_i)$. In our data, we estimate $E(Y_i)$ with $\hat{Y_i}$, which is the corresponding y-value on the estimated line, $\beta_0 + \beta_1 x$. 
+  
 
 
 
