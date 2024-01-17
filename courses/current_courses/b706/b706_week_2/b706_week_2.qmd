@@ -54,8 +54,3 @@ execute:
     - Look for outliers
     - Look for anything that goes against biology/nature
     - Look for patterns. Explore! But remember to never use the same dataset to generate a hypothesis and test it 
-    
-
-
-
-
