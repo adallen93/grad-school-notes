@@ -1,5 +1,5 @@
 ---
-title: "B704 - Week 1 Lecture Notes"
+title: "B706 - Week 1 Lecture Notes"
 date: "January 17, 2024"
 author: "Austin Allen"
 format:
@@ -54,3 +54,80 @@ execute:
     - Look for outliers
     - Look for anything that goes against biology/nature
     - Look for patterns. Explore! But remember to never use the same dataset to generate a hypothesis and test it 
+
+
+
+**Lecture Notes**
+
+* First step in the SAP process
+    - What do you want to know? 
+* Epicycles of analysis
+    - Set expectations
+        - Question of interest?
+        - Data are appropriate
+        - Primary model answers
+    - Collect information
+        - Exploratory data analysis
+        - Build a model
+    - Revise expectations
+* Study teams and stakeholders
+    - PI
+    - co-investigator
+    - Project managers
+    - research assistants
+    - Data managers
+    - Database administrator
+    - Computer programmers
+    - Other statisticians
+    - Collaborative study group
+    - Administrators and policy makers
+    - Gevernmental agencies
+    - The public
+* Communiation skills need to be sharp
+    - There may be lots of people invoved, each with a very different skill 
+    - reflects well on the whole team
+        - pi AND CO-INVESTIGATORS MAKE PRESENTATIONS TO FUNDERS, POLICY MAKERS
+* Why a statistical analysis plan?
+    - Comparable to a labroatory notebook or medical record
+    - Documentation is essential to scientific inquiry
+    - Excellent tool for communication
+* Examples of use of a SAP 
+    - Maintains explicit details of what will be done
+    - Maintains explicit details of what was done
+* What can happen without a SAP? 
+    - Months and years of effort can be lost
+    - Reproducibility of analyses are compromised
+    - Worst case scenario - retrations of papers
+* Elements of a SAP 
+    - Information about the study: title, investigators, IRB#, dates, sponsor
+    - Background
+    - Hypotheses
+    - Study population
+    - Statistical methods
+    - Table and figure shells (tables and figures without data)
+    - Notes about the problem
+* Background section
+    - Why are we doing the study?
+        - What is known in the literature?
+        - How does the prior knowledge lead us to the current question?
+    - What do we hope to learn?
+        - Describe the gaps in knowledge
+        - Describes how the research will fill these gaps
+    - Why is this study significant?
+        - Should directly fill the gaps
+
+**Example**
+
+* Definition of biological aging:
+    - Decline that involves multiple organ systems
+    - Is gradual and progressive
+    - 
+
+* What's the goal? 
+* Why is it important?
+* Gaps in knowledge
+    - "However, little is known about how to identify adults in midlife who are
+aging fast and who are most likely to benefit from geroscience-informed interventions, and
+for this reason, we studied biological aging in midlife."
+* General approach
+* An introduction of the problem for the general public
