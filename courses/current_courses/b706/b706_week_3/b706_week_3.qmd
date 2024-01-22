@@ -1,0 +1,119 @@
+---
+title: "B706 - Week 1 Lecture Notes"
+date: "January 22, 2024"
+author: "Austin Allen"
+format:
+  html:
+    self-contained: true
+    page-layout: full
+    title-block-banner: true
+    toc: true
+    toc-depth: 3
+    toc-location: body
+    number-sections: false
+    html-math-method: katex
+    code-fold: true
+    code-summary: "Show the code"
+    code-overflow: wrap
+    code-copy: hover
+    code-tools:
+        source: false
+        toggle: true
+        caption: See code
+execute: 
+  warning: false
+    
+---
+
+
+
+::: {.panel-tabset}
+
+### Monday
+
+#### Lecture Portion
+
+**Stating and Refining the Question**
+
+* We talked about understanding the background
+    - What the investigator tells you
+
+* Descriptive Questions
+* Exploratory questions
+    - Identify patterns, trends or other relationships between variables
+    * questins are "hypothesis generating"
+        - Does what we learn in the explratory anlaysis hold up in additional studies?
+    - Does the pattern we see suggest a hypothesis?
+    - Examples
+        - GWAS
+        - Is the prevalence of active TV asssociated with glycemia control?
+* Inferential Questions
+    - Most of what you have learned so far is aimed at answering inferential questions
+    - What does the data say about our hypothesis in a new population?
+    - How does our dataset (the sample) match the assumed population?
+    - Does our data fit the assumed distribution?
+    - Examples
+        - Distribution of BDNF genotypes in people with depression
+* Causal Questions
+    - Desire to infer cause and effect
+        - Requires special study designs (RCT)
+
+
+* Predictive Questionss
+    - Guess what will happen in the future
+    - may have a statistical model in place
+    - Need to consider the sample and target population
+    - Examples
+        - What are the predictors of depression?
+* Mechanistic Question
+    - How does this happen?
+    - What are the underlying biological pathways?
+
+**Turning questions into hypotheses**
+
+* Some types of questions are not specified as statistical hypotheses
+    - Descriptive
+    - Exploratory
+* Requires specificity
+    - How exactly will we measure joint pain?
+* Requires specification of the population
+    - Who are we talking about?
+* Where will we get the data? an we get the data?
+* Hypotheses + data $\rightarrow$ SAP. 
+
+**Describing Data**
+
+* In many cases, investigators have some dta they are interested in analyzing
+* in other cases, we need to collect data
+* What are the units of observation?
+    - Subjects
+    - Mice
+    - Schools
+* What are the inclusion/exclusion criteria?
+    - How do subjects get in to the study?
+    - Which subjects are not eligible?
+    - How do the eligibility criteria change the target population?
+* How was teh data collected?
+* How was data quality assured? 
+    - Each time someone touches the data there is an opportunity for error
+    - Need to think about which errors are the most damaigng
+
+**How do we get data?**
+
+* Text
+    - requires computer entry
+* Text files
+* Spreadsheets
+* Analysis ready files
+    - SAS datasets
+    * R dataframes
+* **For all sources of data, we need:**
+    - Data dictionary
+
+
+
+
+
+
+
+### Wednesday
