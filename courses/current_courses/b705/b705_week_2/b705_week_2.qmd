@@ -1,5 +1,5 @@
 ---
-title: "B704 - Week 1 Lecture Notes"
+title: "B705 - Week 2 Lecture Notes"
 date: "January 11, 2024"
 author: "Austin Allen"
 format:
@@ -64,13 +64,13 @@ df <- data.frame(Obs = Obs, Age = Age, SBP = SBP)
 ggplot(df, aes(x = Age, y = SBP)) +
     geom_point(col = "navy", size = 5) +
     geom_smooth(method = "lm", se = FALSE, col = "firebrick") +
-    labs(title = "Example Linear Regression with Age and SBP")
+    labs(title = "Example Linear Regression with Age and SBP") + 
     theme_bw()
 
-fitA <- lm(Age ~ SBP)
-fitB <- lm(SBP ~ Age)
-print(summary(fitA))
-print(summary(fitB))
+# fitA <- lm(Age ~ SBP)
+# fitB <- lm(SBP ~ Age)
+# print(summary(fitA))
+# print(summary(fitB))
 
 ```
 
@@ -99,7 +99,7 @@ print(summary(fitB))
 
 
   
-### Foundation of Statistics
+#### Foundation of Statistics
 
 * What is the statistician's responsibility in a RCT?
     - Is sample size appropriate?
@@ -136,16 +136,17 @@ print(summary(fitB))
 * The MSE is the best estimator of the variance of the distribution of error terms
 
 * $t$ will always be equal to $F$ as long as the degrees of freedom in the number of $F$ is 1. This is the same thing as stating that we're only testing one parameter with an $F$ distribution if the degrees of freedom in the numator are 1. 
-    - The degrees of freedom in the denominator is equal to $n - \text{# of parameters in model}$
-    - I believe this will be equal to $n - 1 - \text{ # of degrees of freedom in numerator}$
+    - The degrees of freedom in the denominator is equal to $n - \text{\# of parameters in model}$
+    - I believe this will be equal to $n - 1 - \text{ \# of degrees of freedom in numerator}$
 * When we have an $R^2$ value of .7, this is essentially saying that 70% of the variability in the data can be explained by $X$. 
 * Remember: the whole idea of statistics is to minimize variability
 * I'm not sure if this is true if the degrees of freedom in F's numerator is larger than 1, but the F-statistic is equal to MSE/SSR. It's something similar for more than 1 parameter in numerator (larger than 1 degree of freedom), but the terms are confusing to me right now. I need to study this a little more
     - I believe that it's actually the MSR and MSE. I think these are slightly different from SSR and SSE in that the MSE is the SSE / # degrees of freedom in F's numerator and MSR is the SSR / # of degrees of freedom in the SSE
-* In the equation $SSE = SSR + SSE$, $SSt$ is independent of the model. $SSR$ and $SSE$ are dependent on the model
+* In the equation $SSE = SSR + SSE$, $SST$ is independent of the model. $SSR$ and $SSE$ are dependent on the model
     - Reminder: $R^2 = \frac{SSR}{SST} = 1 - \frac{SSE}{SST}$
     - $R^2_a = 1 - \frac{SSE/(n-2)}{SST/(n-1)}$
 * $S^2Y$ is the variance in the data. $S^2Y.X$ is the variance of the model
+    - A more precise way to state is that $S^2Y$ is the population variance of the response variable, while $S^2Y.X$ is the variance of the conditional distribution of $Y|X$
 * If there is no predictor in the model, $\beta_0 = \hat{y_i} = \bar{Y}$
 * Degrees of freedom in model:
     - SST df: n - 1
