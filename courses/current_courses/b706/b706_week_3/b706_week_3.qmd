@@ -1,5 +1,5 @@
 ---
-title: "B706 - Week 1 Lecture Notes"
+title: "B706 - Week 3 Lecture Notes"
 date: "January 22, 2024"
 author: "Austin Allen"
 format:
@@ -110,10 +110,106 @@ execute:
 * **For all sources of data, we need:**
     - Data dictionary
 
-
-
-
-
-
-
 ### Wednesday
+
+
+#### Defining Variables and Exploratory Data Analysis
+
+For all sources of data we need:
+
+* A complete description of the data elements
+* What are the identifiers for each unit of anlaysis in each dataset
+    - Subject ID
+    - School ID
+* Some sort of data dictionary
+    - Bare bones: variable names
+    - Better: variable names, labels, source
+    - Much better: Add in variable type (character or numberic), missing values, ranges
+
+**How do we choose which variables?**
+
+* If you're lucky enough to be present at the start of the study, think about potential coding and analysis. Think about ways to check quality of the answers
+* What are the investigators trying to measure?
+* Which variables are standard in the field?
+* What do we know about the quality of the variable?
+    - Number of missing answers
+    - Patter of missing answers
+    - Comparisons to other sources of the variable
+        - Survey gender vs. EMR gender
+        - Survey health conditions vs EMR health conditions
+        - Within study comparisons (exercise, family history and diet were collected in two places)
+        - What to do when they don't match? SAP should include the rules for what to do when they don't match
+* How do we choose how to code it?
+    - Code; take the raw data and create a meaningful variable
+    * What are the investigators trying to measure?
+    * what is the standard in the field? 
+        - unless you have a really good reason, usually use accepted practices/variables
+    * Continuous
+        - Prefer continusous variables, avoid collapsing if you can
+        - Inference on continuous variables is a litle harder
+            - Consider normalizing
+            - one-unit interquartile range
+            - Ask your investigator what a clinically relevant change would be 
+        - Sometimes the distribution is so ugly you can't avoid collapsing
+    * Ordianal
+        - Harder to know what to do
+        - Collapse sometimes
+        Order does not impoly quantity
+        - If you can assume each category is equidistant, coul use a numerical coding
+        - Collapse if some levels are rare
+            - Keep adjacent categories together
+            - make sure collapses categories have the correct meaning
+    * categorical
+        - Hard to know what to do if there are lots of categories
+        - There may be no ogical ordering
+        - Collapse if some categories are rare
+            - Make sure collapsed categories have the correct meaning
+    * For all variables, the interpretation is the most important part
+    * Coding of the variables should recognize the interpretation
+
+**data Description in the SAP**
+
+* Important to have a complete description of each variable in the analysis
+* Often included as a table
+    - variable name
+    - Description of the variable
+    - Variable name from the dataset or data dictionary
+* Include missing data indicators
+* Include any transformations or recodings
+
+
+**Exploratory Data Analysis**
+
+* Don't make THE rookie mistake. This is a complicated anlaysis on bad or wrong data
+* KNOW YOUR DATA
+* Define your unit of observation
+* Define the variable names on 
+
+**For Each Variable**
+
+* what are the units?
+* Examine the range of the variable
+    - min, max, missing
+* Examine the distribution of the variable
+    - Continuous
+    - Ordinal
+    - Categorical
+* Does the distribution look reasonable?
+    - If not, why not?
+    - Is there a reasonable explanation?
+    - Verify that explanation with the investigator
+
+**Outliers**
+
+* Often expressed as being >3 or 4 SD from the mean
+* Ask the investigator to define outliers
+* May decide to delete or change the outlying value
+    - e.g. move the outlier's value to the nearest value
+* Handle outliers before the analysis itself
+* Can examine the robustness to decision on how to handle outliers
+
+
+
+
+
+

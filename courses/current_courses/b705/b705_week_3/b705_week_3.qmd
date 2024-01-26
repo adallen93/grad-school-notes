@@ -65,7 +65,28 @@ $\hat{Y} &= X \hat{\beta}\\
 \hat{Y} &= HY
 \end{align*}
 
+* Assumptions
+  - Linearity: $E(\epsilon_i) = 0$, which implies that $E(Y_i) = \beta_0 + \beta_1 X_{1_i} + ... + \beta_p X_{p_i}$
+  - Homoscedasticity: $Var(\epsilon_i) = \sigma^2_\epsilon$, which implies that $Var(Y_i|X_{1_i}, ... , X_{p_i}) = \sigma^2_\epsilon$
+  - Normality: $\epsilon \sim N(0, \sigma^2)$, which implies that $Y_i | X_{1_i},...,X_{p_i} \sim N(\beta_0 + \beta_1 X_{1_i} + ... + \beta_p X_{p_i}, \sigma^2_\epsilon)$
+  - Independence: $\epsilon_i \epsilon_j$ are independent for $i \ne j$. This means that all $Y$ values are independent of each other
+* Whenever you run an analysis 
+* Test statistic for global hypothesis: $F = \frac{\text{SSR}/p}{\text{SSE}/(n-p-1)} \sim F(p, n-p-1)$
 
+
+
+### Thursday
+
+
+#### Lecture Notes
+
+* If you have an ANOVA table, the bottom row of the MS column is not that useful. It is essential $S^2Y$
+* $F = \frac{MSR}{MSE} \sim F(\text{Model DF}, \text{Error DF})$
+* Matrix form: $\underbrace{Y}_{nx1} = \underbrace{X}_{\text{n x [p + 1]}} \overbrace{\beta}_{\text{n x [p + 1]}} + \underbrace{\epsilon}_{\text{n x 1}}$
+  - p is the number of predictors in the model. It is a n x [p + 1] matrix because there is an extra column for $\beta_0$
+  - $X$ is the called the design matrix. It's first column is all 1's that correspond to the intercept. The rest of the columns correspond to $\beta_1,...,\beta_p$
+* In the output for a lm summary in R, the residual standard error is $SY.X$. I think I get this. It's the same thing as $\hat{\sigma_\epsilon}$. The residual standard error is the estimate for the standard deviation for $Y_i$ given the model, which is the same as the estimate for the standard deviation of $\epsilon_i$
+* Again the F-statistic is testing the global hypothesis, which is that $\beta_1 = ... = \beta_p = 0$
 
 
 :::

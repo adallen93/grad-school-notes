@@ -1,0 +1,206 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={BIOSTAT 704 - Homework 1},
+  pdfauthor={Austin Allen},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{BIOSTAT 704 - Homework 1}
+\author{Austin Allen}
+\date{January 30, 2024}
+
+\begin{document}
+\maketitle
+
+\hypertarget{problem-1}{%
+\subsubsection{Problem 1}\label{problem-1}}
+
+\textbf{BE Exercise 7.1: Consider a random sample of size n from a
+distribution with CDF \(F(x) = 1 - 1/x\) if \(1 \le x < \infty\), and
+zero otherwise.}
+
+\hypertarget{a-derive-the-cdf-of-the-smallest-order-statistic-x_1n}{%
+\paragraph{\texorpdfstring{a) Derive the CDF of the smallest order
+statistic,
+\(X_{1:n}\)}{a) Derive the CDF of the smallest order statistic, X\_\{1:n\}}}\label{a-derive-the-cdf-of-the-smallest-order-statistic-x_1n}}
+
+\begin{align*}
+G_n(y) &= P(Y_n \le y)\\
+&= 1 - P(Y_n > y)\\
+&= 1 - P(X_{1:n} > y)\\
+&= 1 - P(X_1 > y, X_2 > y,...,X_n > y)\\
+&= 1 - P(X_1 > y)P(X_2 > y)...P(X_n > y)\\
+&= 1 - [P(X_i > y)]^n\\
+&= 1 - [1 - P(X_i \le y)]^n\\
+&= 1 - [1 - F_{X}(x)]^n\\
+&= 1 - [1 - (1 - 1/x)]^n\\
+&= 1 - (1/x)^n\\
+G_{X_{1:n}}(x) &= 
+\begin{cases}
+  1 - \frac{1}{x^n}, &\text{ for } x \ge 1\\
+  0, &\text{ o.w.}
+\end{cases}
+\end{align*}
+
+\hypertarget{b-find-the-limiting-distribution-of-x_1n}{%
+\paragraph{\texorpdfstring{b) Find the limiting distribution of
+\(X_{1:n}\)}{b) Find the limiting distribution of X\_\{1:n\}}}\label{b-find-the-limiting-distribution-of-x_1n}}
+
+For \(x \ge 1\),
+
+\begin{align*}
+\lim_{n \to \infty} 1 - 1/x^n &= 1
+\end{align*} Thus the limiting distribution of G\_\{X\_\{1:n\}\}(x) is,
+\begin{align*}
+G(y) &= 
+\begin{cases}
+  1, &\text{ for } x \ge 1\\
+  0, &\text{ o.w.}
+\end{cases}
+\end{align*}
+
+\hypertarget{c-find-the-limiting-distribution-of-x_1nn}{%
+\paragraph{\texorpdfstring{c) Find the limiting distribution of
+\(X_{1:n}^n\)}{c) Find the limiting distribution of X\_\{1:n\}\^{}n}}\label{c-find-the-limiting-distribution-of-x_1nn}}
+
+\textbf{BE Exercise 7.18}
+
+\hypertarget{problem-2}{%
+\subsubsection{Problem 2}\label{problem-2}}
+
+\textbf{BE Exercise 7.2}
+
+\textbf{BE Exercise 7.19}
+
+\textbf{BE Exercise 7.3}
+
+\hypertarget{problem-3}{%
+\subsubsection{Problem 3}\label{problem-3}}
+
+\hypertarget{consider-example-7.2.2-in-the-textbook-on-pages-233.-let-x1-x2-.-.-.-x_n-be-a-random-sample-from-an-exponential-distribution-xi-expux3b8-and-let-y_n-x_1n-be-the-smallest-order-statistic.}{%
+\paragraph{\texorpdfstring{Consider Example 7.2.2 in the textbook, on
+pages 233. Let \(X1, X2, . . . , X_n\) be a random sample from an
+exponential distribution, Xi ∼ EXP(θ) and let \(Y_n = X_{1:n}\) be the
+smallest order
+statistic.}{Consider Example 7.2.2 in the textbook, on pages 233. Let X1, X2, . . . , X\_n be a random sample from an exponential distribution, Xi ∼ EXP(θ) and let Y\_n = X\_\{1:n\} be the smallest order statistic.}}\label{consider-example-7.2.2-in-the-textbook-on-pages-233.-let-x1-x2-.-.-.-x_n-be-a-random-sample-from-an-exponential-distribution-xi-expux3b8-and-let-y_n-x_1n-be-the-smallest-order-statistic.}}
+
+\hypertarget{a-using-the-definition-of-a-cdf-theorem-2.2.3-show-that-g_ny-is-a-proper-cdf.-that-is-show-that-the-conditions-2.2.82.2.11-hold-for-g_ny.}{%
+\subparagraph{\texorpdfstring{a) Using the definition of a CDF (Theorem
+2.2.3), show that \(G_n(Y)\) is a proper CDF. That is, show that the
+conditions (2.2.8--2.2.11) hold for
+\(G_n(y)\).}{a) Using the definition of a CDF (Theorem 2.2.3), show that G\_n(Y) is a proper CDF. That is, show that the conditions (2.2.8--2.2.11) hold for G\_n(y).}}\label{a-using-the-definition-of-a-cdf-theorem-2.2.3-show-that-g_ny-is-a-proper-cdf.-that-is-show-that-the-conditions-2.2.82.2.11-hold-for-g_ny.}}
+
+\hypertarget{b-sketch-the-graph-of-the-limiting-function-gy.}{%
+\subparagraph{\texorpdfstring{b) Sketch the graph of the limiting
+function
+\(G(Y)\).}{b) Sketch the graph of the limiting function G(Y).}}\label{b-sketch-the-graph-of-the-limiting-function-gy.}}
+
+\hypertarget{c-explain-why-the-authors-state-that-gy-being-discontinuous-and-not-even-right-continuous-at-y-0-is-not-a-problem.-how-does-this-connect-with-our-explanations-in-the-lecture-notes-on-pages-12}{%
+\subparagraph{c) Explain why the authors state that G(y) being
+discontinuous (and not even right-continuous) at y = 0 ''is not a
+problem''. How does this connect with our explanations in the lecture
+notes on pages
+1--2?}\label{c-explain-why-the-authors-state-that-gy-being-discontinuous-and-not-even-right-continuous-at-y-0-is-not-a-problem.-how-does-this-connect-with-our-explanations-in-the-lecture-notes-on-pages-12}}
+
+\hypertarget{problem-4}{%
+\subsubsection{Problem 4}\label{problem-4}}
+
+\hypertarget{example-7.2.6-in-the-textbook-on-page-235}{%
+\paragraph{(Example 7.2.6 in the textbook, on page
+235)}\label{example-7.2.6-in-the-textbook-on-page-235}}
+
+\hypertarget{consider-x1-.-.-.-x_n-a-random-sample-where-x_i-expux3b8.-define-the-random-sequence-y_n-1ux3b8x_nn-lnn.-the-purpose-of-this-exercise-is-to-demonstrate-that-y_n-converges-in-distribution}{%
+\paragraph{\texorpdfstring{Consider \(X1, . . . , X_n\) a random sample
+where \(X_i ∼ EXP(θ)\). Define the random sequence
+\(Y_n = (1/θ)X_{n:n} − \ln(n)\). The purpose of this exercise is to
+demonstrate that \(Y_n\) converges in
+distribution}{Consider X1, . . . , X\_n a random sample where X\_i ∼ EXP(θ). Define the random sequence Y\_n = (1/θ)X\_\{n:n\} − \textbackslash ln(n). The purpose of this exercise is to demonstrate that Y\_n converges in distribution}}\label{consider-x1-.-.-.-x_n-a-random-sample-where-x_i-expux3b8.-define-the-random-sequence-y_n-1ux3b8x_nn-lnn.-the-purpose-of-this-exercise-is-to-demonstrate-that-y_n-converges-in-distribution}}
+
+\hypertarget{a-prove-that-the-cdf-of-y_n-is}{%
+\subparagraph{\texorpdfstring{a) Prove that the CDF of \(Y_n\)
+is}{a) Prove that the CDF of Y\_n is}}\label{a-prove-that-the-cdf-of-y_n-is}}
+
+\begin{align*}
+G_n(Y) &=
+\begin{cases}
+  \left[ 1 - \frac{1}{n} e^{-y} \right]^n, & \text{when } y > \ln(n) \\
+  0, & \text{otherwise}
+\end{cases}
+\end{align*}
+
+\hypertarget{b-show-that-lim_n-to-infty-g_ny-gy-with-e-e-y-where---infty-y-infty.}{%
+\subparagraph{\texorpdfstring{b) Show that
+\(\lim_{n \to \infty} G_n(Y) = G(Y)\), with \(e^{-e^{-y}}\), where
+\(- \infty < y < \infty\).}{b) Show that \textbackslash lim\_\{n \textbackslash to \textbackslash infty\} G\_n(Y) = G(Y), with e\^{}\{-e\^{}\{-y\}\}, where - \textbackslash infty \textless{} y \textless{} \textbackslash infty.}}\label{b-show-that-lim_n-to-infty-g_ny-gy-with-e-e-y-where---infty-y-infty.}}
+
+\hypertarget{c-show-that-gy-is-a-cdf.}{%
+\subparagraph{\texorpdfstring{c) Show that \(G(Y)\) is a
+CDF.}{c) Show that G(Y) is a CDF.}}\label{c-show-that-gy-is-a-cdf.}}
+
+\hypertarget{problem-5}{%
+\subsubsection{Problem 5}\label{problem-5}}
+
+\textbf{BE Exercise 7.5}
+
+\end{document}

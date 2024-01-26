@@ -1,0 +1,110 @@
+---
+title: "BIOSTAT 704 - Homework 1"
+date: "January 30, 2024"
+author: "Austin Allen"
+output:
+  pdf_document:
+    latex_engine: xelatex
+---
+
+### Problem 1
+
+**BE Exercise 7.1: Consider a random sample of size n from a distribution with CDF $F(x) = 1 - 1/x$ if $1 \le x < \infty$, and zero otherwise.**
+
+#### a) Derive the CDF of the smallest order statistic, $X_{1:n}$
+
+
+\begin{align*}
+G_n(y) &= P(Y_n \le y)\\
+&= 1 - P(Y_n > y)\\
+&= 1 - P(X_{1:n} > y)\\
+&= 1 - P(X_1 > y, X_2 > y,...,X_n > y)\\
+&= 1 - P(X_1 > y)P(X_2 > y)...P(X_n > y)\\
+&= 1 - [P(X_i > y)]^n\\
+&= 1 - [1 - P(X_i \le y)]^n\\
+&= 1 - [1 - F_{X}(x)]^n\\
+&= 1 - [1 - (1 - 1/x)]^n\\
+&= 1 - (1/x)^n\\
+G_{X_{1:n}}(x) &= 
+\begin{cases}
+  1 - \frac{1}{x^n}, &\text{ for } x \ge 1\\
+  0, &\text{ o.w.}
+\end{cases}
+\end{align*}
+
+#### b) Find the limiting distribution of $X_{1:n}$
+
+For $x \ge 1$, 
+
+\begin{align*}
+\lim_{n \to \infty} 1 - 1/x^n &= 1
+\end{align*}
+Thus the limiting distribution of G_{X_{1:n}}(x) is, 
+\begin{align*}
+G(y) &= 
+\begin{cases}
+  1, &\text{ for } x \ge 1\\
+  0, &\text{ o.w.}
+\end{cases}
+\end{align*}
+
+
+
+#### c) Find the limiting distribution of $X_{1:n}^n$
+
+
+
+
+**BE Exercise 7.18**
+
+
+### Problem 2
+
+**BE Exercise 7.2**
+
+**BE Exercise 7.19**
+
+**BE Exercise 7.3**
+
+
+### Problem 3
+
+#### Consider Example 7.2.2 in the textbook, on pages 233. Let $X1, X2, . . . , X_n$ be a random sample from an exponential distribution, Xi ∼ EXP(θ) and let $Y_n = X_{1:n}$ be the smallest order statistic.
+
+##### a) Using the definition of a CDF (Theorem 2.2.3), show that $G_n(Y)$ is a proper CDF. That is, show that the conditions (2.2.8–2.2.11) hold for $G_n(y)$.
+
+##### b) Sketch the graph of the limiting function $G(Y)$. 
+
+##### c) Explain why the authors state that G(y) being discontinuous (and not even right-continuous) at y = 0 ”is not a problem”. How does this connect with our explanations in the lecture notes on pages 1–2?
+
+
+
+### Problem 4
+
+
+#### (Example 7.2.6 in the textbook, on page 235)
+
+
+#### Consider $X1, . . . , X_n$ a random sample where $X_i ∼ EXP(θ)$. Define the random sequence $Y_n = (1/θ)X_{n:n} − \ln(n)$. The purpose of this exercise is to demonstrate that $Y_n$ converges in distribution
+
+##### a) Prove that the CDF of $Y_n$ is 
+
+\begin{align*}
+G_n(Y) &=
+\begin{cases}
+  \left[ 1 - \frac{1}{n} e^{-y} \right]^n, & \text{when } y > \ln(n) \\
+  0, & \text{otherwise}
+\end{cases}
+\end{align*}
+
+
+##### b) Show that $\lim_{n \to \infty} G_n(Y) = G(Y)$, with $e^{-e^{-y}}$, where $- \infty < y < \infty$. 
+
+##### c) Show that $G(Y)$ is a CDF. 
+
+
+
+### Problem 5
+
+**BE Exercise 7.5**
+

@@ -144,7 +144,7 @@ ggplot(df, aes(x = Age, y = SBP)) +
     - I believe that it's actually the MSR and MSE. I think these are slightly different from SSR and SSE in that the MSE is the SSE / # degrees of freedom in F's numerator and MSR is the SSR / # of degrees of freedom in the SSE
 * In the equation $SSE = SSR + SSE$, $SST$ is independent of the model. $SSR$ and $SSE$ are dependent on the model
     - Reminder: $R^2 = \frac{SSR}{SST} = 1 - \frac{SSE}{SST}$
-    - $R^2_a = 1 - \frac{SSE/(n-2)}{SST/(n-1)}$
+    - $R^2_a = 1 - \frac{SSE/(n-p - 1)}{SST/(n-1)}$
 * $S^2Y$ is the variance in the data. $S^2Y.X$ is the variance of the model
     - A more precise way to state is that $S^2Y$ is the population variance of the response variable, while $S^2Y.X$ is the variance of the conditional distribution of $Y|X$
 * If there is no predictor in the model, $\beta_0 = \hat{y_i} = \bar{Y}$

@@ -1,0 +1,127 @@
+---
+title: "B705 - Homework 1"
+date: "January 16, 2024"
+author: "Austin Allen"
+format:
+  html:
+    self-contained: true
+    page-layout: full
+    title-block-banner: true
+    toc: true
+    toc-depth: 3
+    toc-location: body
+    number-sections: false
+    html-math-method: katex
+    code-fold: true
+    code-summary: "Show the code"
+    code-overflow: wrap
+    code-copy: hover
+    code-tools:
+        source: false
+        toggle: true
+        caption: See code
+execute: 
+  warning: false
+    
+---
+
+
+
+
+1. Given the Motor Trend Car Road Tests (mtcars) dataset (mtcars.csv):
+Let 
+\begin{align*}
+X_i = \left \{
+    \begin{array}{11} 
+        1 \text{if wt} > \text{ median}\\
+        0 \text{if wt} \le \text{ median}
+    \end{array}
+\right .
+wt = weight (1000 lbs)
+where Xis called an indicator or dummy variable
+In R typ e help(mtcars) will provide more details on the dataset and variables name.
+a) Fit a simple linear regression, using mpgi =  0 +  1 Xi + i ; how you interpret ^ 1
+in the context of the prob elm?
+b) Write the ab ove mo del in a matrix form (ie, Y= X + ). Identify the design
+matrix X.
+c) What is the estimated mean square errors (MSE)?
+d) Re-do part a using mpgi =  0 +  1 wti + i . How this results di er from part a?
+Which mo del would you recommend? why?
+e) Supp ose we  tted a mo del in part a by adding hp(horsep ower) and inetraction,
+ie mpgi =  0 +  1 Xi +  2 hpi +  3 Xi hpi + i . How would you interpret term? is
+this mo del additive?
+f ) Similarly, we added hpand interaction to the mo del in part e, ie mpgi =  0 +
+ 1 wti +  2 hpi +  3 wti hpi + i . How should the interaction term b e interpreted
+in this mo del? Can we interpret the main e ects? why or why not?
+2. Stigler, History of Statistics pg.285 gives Galton's famous data on heights of son-
+s (Yin inches) and average parents height (Xin inches) scaled to represent a
+male height (essentially sons' heights versus fathers' heights). Data are given in
+parents offsprings.csv. Consider a statistical mo del for these data, randomly
+sampled from some p opulation of interest. In particular, cho ose a mo del which ac-
+counts for the apparent linear dep endence of the mean height of sons on midparent
+height X.
+a) Construct a scatterplot of these data.
+b) What is  1 ? Is this statistic or parameter?
+c) What is the estimated slop e ( ^ 1 )? Is this statistic or parameter?
+d) How much do es ^ 1 vary ab out  1 from sample to sample? (Provide an estimate
+of the standard error, as well as an expression indicating how it was computed)
+e) What is a region of plausible values for  1 suggested by the data?
+f ) What is the line that b est  ts these data, using criterion that smallest sum of
+squared residuals is "b est?"
+g) How much of the observed variation is the heights of sons (the y-axis) is explained
+by this "b est" line?
+h) What is the estimated average height of sons whose midparent height is x= 68?
+i) Is this the true average height in the whole p opulation of sons whose midparent
+height is x= 68?
+j) Under the mo del, what is the true average height of sons with midparent height
+is x= 68?
+k) What is the estimated standard deviation among the p opulation of sons whose
+midparent height is x= 68? Would you call this standard deviation a "standard
+error"?
+l) What is the estimated standard deviation among the p opulation of sons whose
+midparent height is x= 72? Bigger, smaller, or the same that for x= 68? Is your
+answer obviously supp orted or refuted by insp ection of the scatterplot?
+m) What is the estimated standard error of the estimated average for sons with
+midparent height x= 68;^(68) = ^ 0 + 68 ^ 1 ? Provide an expression for this
+standard error.
+n) Is the estimated standard error of ^(72) bigger, smaller, or the same as that for
+^(68)?
+o) Is the observed linear asso ciation b etween son's height and midparent height
+strong? Rep ort a test statistic.
+p) What quantity can you use to describ e or characterize the linear asso ciation b e-
+tween son's height and midparent height in the whole p opulation? Is this a pa-
+rameter or a statistic?
+Page2
+3. Consider data on corn yield Y(bushels/acre) and rainfall X(inches/yr) in six Mid-
+western states recorded from 1890 to 1927. Data are given in corn yield and rainfall.csv.
+a) Construct a scatterplot of corn yield and rainfall measurements.
+b) How can we describ e the asso ciation b etween yield and rainfall? Do es it app ear
+linear?
+c) How can we measure the strength of linear asso ciation?
+d) To what degree the variability in yield describ ed or explained by its asso ciation
+with rainfall? In what units this variability measured?
+e) How can we use this asso ciation to estimate average yield, given a certain level of
+rainfall, say 14 inches/yr?
+f ) How can we use this asso ciation to predict future yield, if we have an idea ab out
+what the rainfall will b e? use x0 = 14 (inches/yr).
+g) What is the di erence b etween e and f ?
+h) What prop ortion of variance in yield is explained by the linear regression mo del?.
+Page3
+4. An investigator wants to examine the relationship b etween b o dy temp erature yand
+heart rate x. Further, he would like to use heart rate to predict the b o dy temp erature.
+(Data Bo dyTemp erature.csv).
+a) Construct a simple linear regression mo del for b o dy temp erature using heart rate
+as the predictor.
+b) Interpret the estimated slop e ( ^ 1 ) and examine its statistical signi cance.
+c) Construct the 95% con dence interval for the p opulation slop e  1 . How would
+you interpret this CI and do es it agree with your conclusion in part (b)?
+d) Calculate adjusted R2 , what is tell us ab out the contribution of heart rate in the
+mo del?
+e) If someones heart rate is 75, what would b e your estimate of this p ersons b o dy
+temp erature?
+f ) Supp ose the investigator b elieve that adding sex to the mo del in part (a) will
+improve mo del prediction, is he correct? how would you quantify the contribution
+of sex to the mo del?
+g) Supp ose theinvestigator added an interaction b etween heart rate and sex to the
+mo del in part (f ), how would you Interpret this interaction term?
+Page4

@@ -1,0 +1,93 @@
+
+
+
+### Organizations
+
+
+**Successful Org Structures**
+
+* Define each employee's job and how it fits in the overall system
+* Are dtermined based on an org's business goals, industry, and culture
+* Lays out who does what so the company can meet its objectives
+
+**4 Primary Types**
+
+* Functional, top-down
+    - Found in traditional business structures
+    - C-Suite at the top, then other senior management middle manager, 
+    - Divided into traditional departments like IT, marketing, finance
+- Divisional organization
+    - Used when a company is organized along a product line or specific geography
+    - you see this in academic departments
+    - Another example: a car company may be split into SUVs, sedans, and electric cars
+- Matrix organization
+    - Employees are divided into teams by projects led by a projec t or product manager, but also report to a functional manager
+    - The company operates using cross-functional groups or project teams instead of vertical silos
+    - may lead to more open communication and create a flexible, dynamic work environment
+    - resources (staff, money, etc) can easily move where they're needed
+    - Cons: may create confusion as to whom to report to for certain things
+- Flat organization
+    - Few or no levels of management between executives and all other employees
+    - Empowers self-management and greater decision making ability for every employee
+    - most commonly employed by small businesses
+    Cons: no clear path for promotion
+
+**Why an organizational chart**
+
+* Show management structure
+* Additional organizational struture
+* Planning tool
+* Employee reference tool
+* Employee directory
+
+### Purpose of a job description
+
+* Summarizes the essential responsibilities, activities, qualifications and skills for the role. 
+* Components
+    - job title
+        - Should be 1-4 words
+        - differs by industry
+        - Consider using general language (senior) instead of internal terms (I, II, III)
+    - Job purpose
+        - Provides a high-level overview
+    - Duties
+        - sometimes referred to as essential functions
+        - Explains why, how, where, or how
+        - describe te nature of contact, the people contacted, and the extent to which the person will interact with others inside and outside of the company
+        - ordered by importance and/or frequency in which they are performed
+    - qualifications
+        - required qualifications
+            - List required level of jo knowledge
+        - Education
+            - identify the educational qualifactions that an employee must possess to stsfactorily perform the job duties and responsibilities
+        - Additional qualifications
+            - Identify the minimum number of experience required in terms of years and the type of work expereince that an employee needs to be qualified for the job
+            - mention if internships, undergraduate work experience, and graduate assistantships are accepted levels of experience
+    - Levels of Knowledge
+        - Working knowledge
+        - General knowledge
+        - Thorough knowledge
+        - Comprehensive knowledge
+    - Working conditions
+        - Environment such as an office or outdoors
+        - Exposures encouuntered, such as hazardous materials, loud noise, or extreme heat/cold
+        - Essential physical requirements, such as climbing
+    - Salary
+        - Will depend on responsibilities, organizational structure, educational requirements, industry, geographic location, and market rates
+        - Pay transparency (as of Jan 2024) guide
+            - california, Colorado, Connecticut, Maryland, nevada, new york, Rhode island, Washington
+        
+**Email Signature**
+
+Austin Allen
+Master of Biostatistics | class of 2025
+Duke University | School of Medicine
+linkedin 
+
+
+
+    - Environment
+
+
+
+
