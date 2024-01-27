@@ -35,11 +35,10 @@ G_{X_{1:n}}(x) &=
 #### b) Find the limiting distribution of $X_{1:n}$
 
 For $x \ge 1$, 
-
 \begin{align*}
 \lim_{n \to \infty} 1 - 1/x^n &= 1
 \end{align*}
-Thus the limiting distribution of G_{X_{1:n}}(x) is, 
+Thus the limiting distribution of $G_{X_{1:n}}(x)$ is, 
 \begin{align*}
 G(y) &= 
 \begin{cases}
@@ -52,7 +51,17 @@ G(y) &=
 
 #### c) Find the limiting distribution of $X_{1:n}^n$
 
+Let $Y_N = X_{1:n}^n$. For $y \ge 1$, 
 
+\begin{align*}
+G_n(y) &= P(Y_n \le y)\\
+&= P(X_{1:n}^n \le y)\\
+&= P(X_{1:n} \le y^{1/n})\\
+&= 1 - (\frac{1}{y^{1/n}})^n\\
+&= 1 - \frac{1}{y}\\
+G(y) &= \lim_{n \to \infty} 1 - \frac{1}{y}\\
+&= 1 - \frac{1}{y}
+\end{align*}
 
 
 **BE Exercise 7.18**
