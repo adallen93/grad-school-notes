@@ -13,6 +13,7 @@ output:
 
 #### a) Derive the CDF of the smallest order statistic, $X_{1:n}$
 
+> For $x \ge 1$, 
 
 \begin{align*}
 G_n(y) &= P(Y_n \le y)\\
@@ -118,12 +119,11 @@ G_n(y) &= P(Y_n \le y)\\
 &= P(X_1 \le y, X_2 \le y, ..., X_n \le y)\\
 &= P(X_1 \le y)P(X_2 \le y)...P(X_n \le y)\\
 &= [P(X_i \le y)]^n\\
-&= [(1 - e^{-y})^{-1}]^n\\
-&= (1 - e^{-y})^{-n}
+&= [(1 + e^{-y})^{-1}]^n\\
+&= (1 + e^{-y})^{-n}
 \end{align*}
 
-NOTE: THIS PROBLEM IS NOT FINISHED. I NEED TO DETERMINE HOW TO TAKE THE LIMIT AS N $\rightarrow \infty$. 
-
+> At this point, I'm not sure how to proceed. I believe that I should take the limit, but I do not know how to do this. Entering the function into Desmos reveals that the function will not be right-continuous and non-decreasing for arbitrarily large values of $n$, so I would conclude that $X_{n:n}$ does not have a limiting distribution. 
 
 
 ##### b) Does $X_{n:n} - \ln (n)$ have a limiting distribution? 
@@ -355,6 +355,7 @@ G_n(Y) &=
 \end{cases}
 \end{align*}
 
+> For all values of $y$ in the support of $G_n(y)$, 
 
 \begin{align*}
 G_n(Y) &= P(Y_n \le y)\\
@@ -369,40 +370,69 @@ G_n(Y) &= P(Y_n \le y)\\
 &= [1 - \frac{1}{n}e^{-y}]^n
 \end{align*}
 
-> Thus, 
+> Note that the original support for $F_X(x)$ was $x > 0$. However, because we are subtracting $\ln(n)$ from $X_{n:n}$, and because we want $x$ to be positive, the support for $y$ is $y > -\ln(n)$. This leads to the following result:
 
 \begin{align*}
 G_n(Y) &=
 \begin{cases}
-  \left[ 1 - \frac{1}{n} e^{-y} \right]^n, & \text{when } y > 0 \\
+  \left[ 1 - \frac{1}{n} e^{-y} \right]^n, & \text{when } y > \ln (n) \\
   0, & \text{otherwise}
 \end{cases}
 \end{align*}
 
-##### b) Show that $\lim_{n \to \infty} G_n(Y) = G(Y)$, with $e^{-e^{-y}}$, where $- \infty < y < \infty$. 
+##### b) Show that $\lim_{n \to \infty} G_n(Y) = G(Y)$, with $G(y) = e^{-e^{-y}}$, where $- \infty < y < \infty$.
+
+
+
+\begin{align*}
+\lim_{n \to \infty} (1 + c/n + d(n)/n)^{nb} &= e^{cb} \\
+\lim_{n \to \infty} \left( 1 - \frac{1}{n} e^{-y} \right)^n &= e^{e^{-y}} \\
+&= G(y)
+\end{align*}
+
+
+> Note that the function is continuous over all real numbers, and that $\lim_{y \to -\infty} [ 1 - \frac{1}{n} e^{-y} ]^n = 0$ and that $\lim_{y \to \infty} [ 1 - \frac{1}{n} e^{-y} ]^n = 1$. Thus, the support of $G(y)$ is $- \infty < y < \infty$.
 
 
 
 
+##### c) Show that $G(y)$ is a CDF. 
 
+> We will show that $G(y)$ is a CDF by showing that it satisfies the three conditions in the definition of a CDF:
 
-
-
-
-
-
-
-
-
-
-
-
-
-##### c) Show that $G(Y)$ is a CDF. 
+> 1. $\lim_{y \to \infty} G_n(y)$ must equal 1, and $\lim_{y \to - \infty} G_n(y)$ must equal 0
+> - We showed this in part b. This condition is met 
+> 2. The function must not be decreasing
+>   -  The function $e^{-e^{-y}}$ does not decrease as $y$ increases. This condition is met
+> 3. The function must be right continuous over its domain
+>   - Because of the exponential nature of this function, there are no real values of $G(y)$ that are discontinuous, so it is also right continous from $-\infty$ to $\infty$. This condition is met, and the function $G(y)$ is a CDF
 
 \newpage
 
 ### Problem 5
 
-**BE Exercise 7.5**
+**BE Exercise 7.5: Suppose that $Z_i \sim N(0,1)$ and that $Z_1, Z_2,...$ are independent. Use moment generating functions to find the limiting distribution of $\sum_{i = 1}^{n} (Z_i + 1/n)/\sqrt{n}$.**
+
+> Let $Y_n = \sum_{i = 1}^{n} (Z_i + 1/n)/\sqrt{n}$:
+
+\begin{align*}
+M_{Y_n}(t) &= E[\text{exp}( \sum_{i = 1}^{n} (Z_i + 1/n)(t/\sqrt{n}))]\\
+&= E[\text{exp}(t/\sqrt{n} (\sum_{i = 1}^{n} (Z_i + 1/n)))]\\
+&= E[\text{exp}(t/\sqrt{n} (\sum_{i = 1}^{n} Z_i + \sum_{i = 1}^{n} 1/n))]\\
+&= E[\text{exp}(t/\sqrt{n} (\sum_{i = 1}^{n} Z_i + 1))]\\
+&= E[\text{exp}( \sum_{i = 1}^{n} Z_it/\sqrt{n} + t/\sqrt{n}))]\\
+&= E[\text{exp}( \sum_{i = 1}^{n} Z_it/\sqrt{n}) \text{exp}(t/\sqrt{n}))]\\
+&= \text{exp}(t/\sqrt{n})E[\text{exp}( \sum_{i = 1}^{n} Z_it/\sqrt{n})]\\
+&= \text{exp}(t/\sqrt{n})E[\prod_{i = 1}^{n}\text{exp}(Z_it/\sqrt{n})]\\
+&= \text{exp}(t/\sqrt{n})\prod_{i = 1}^{n}E[\text{exp}(Z_it/\sqrt{n})]\\
+&= \text{exp}(t/\sqrt{n})[E[\text{exp}(Z_it/\sqrt{n})]]^n\\
+&= \text{exp}(t/\sqrt{n})[M_Z(t/\sqrt{n})]^n\\
+&= \text{exp}(t/\sqrt{n})[\text{exp}(t^2/{2n})]^n\\
+&= \text{exp}(t/\sqrt{n})\text{exp}(t^2/{2})\\
+\lim_{n \to \infty} \text{exp}(t/\sqrt{n})\text{exp}(t^2/{2}) &= \text{exp}(0)\text{exp}(t^2/2)\\
+&= \text{exp}(t^2/2)
+\end{align*}
+
+
+> Thus, the limiting distribution of $\sum_{i = 1}^{n} (Z_i + 1/n)/\sqrt{n}$ is the standard normal distribution, $Y \rightarrow^{d} N(0,1)$.
 
