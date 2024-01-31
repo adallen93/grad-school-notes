@@ -102,6 +102,7 @@ G(y) &=
 \end{cases}
 \end{align*}
 
+\newpage
 
 ### Problem 2
 
@@ -204,7 +205,7 @@ df %>%
 
 ```
 
-> Let $Y_n = X_{1:n}$. For $ x> 1$, 
+> Let $Y_n = X_{1:n}$. For $x > 1$, 
 
 \begin{align*}
 G_n(y) &= P(Y_n \le y)\\
@@ -276,6 +277,7 @@ G^*(y) &=
 \end{cases}
 \end{align*}
 
+\newpage
 
 ### Problem 3
 
@@ -293,22 +295,35 @@ G_n(y) &= P(Y_n \le y)\\
 &= 1 - P(X_1 > y)P(X_2 > y)...P(X_n > y)\\
 &= 1 - [P(X_i > y)]^n\\
 &= 1 - [1 - P(X_i \le y)]^n\\
-&= 1 - [1 - (1 - e^{-y})]^n\\
-&= 1 - e^{-ny}
+&= 1 - [1 - (1 - e^{-y/\theta})]^n\\
+&= 1 - e^{-ny/\theta}
 \end{align*}
 
 > The following conditions must be met for $G_n(y)$ to be a proper CDF. I will evaluate each one in turn:
 > 
 > 1. $\lim_{y \to \infty} G_n(y)$ must equal 1, and $\lim_{y \to - \infty} G_n(y)$ must equal 0
-> `- Note that $n$ is required to be a positive integer for this to be a valid sequence. This being the case, no matter what arbitrary value we may have for $n$, the limit as $y$ goes to positive infinity is 1, and the limit as $y$ goes to negative infinity is 0. This condition holds
+> - Note that $n$ is required to be a positive integer for this to be a valid sequence. This being the case, no matter what arbitrary value we may have for $n$, the limit as $y$ goes to positive infinity is 1, and the limit as $y$ goes to negative infinity is 0. This condition holds
 > 2. The function must not be decreasing
 >   - Again, because $n$ must be a positive integer, any value we choose for $n$ over $G_n(y)$'s domain will not alter the fact that the function is not decreasing
 > 3. The function must be right continuous over its domain
->   - The funcion is continuous for all $y > 0$. Because 
+>   - The funcion is continuous for all $y > 0$.
 
 ##### b) Sketch the graph of the limiting function $G(Y)$. 
 
-```{r message=FALSE, warning=FALSE}
+
+```{r message=FALSE, warning=FALSE, echo=FALSE, fig.align='center', fig.width=4, fig.height=2}
+library(tidyverse)
+ggplot() +
+  geom_segment(aes(x = -4, xend = 0, y = 0, yend = 0), col = "skyblue") + 
+  geom_segment(aes(x = 0.05, xend = 4, y = 1, yend = 1), col = "skyblue") +
+  geom_point(aes(x = 0, y = 0), size = 3, col = "skyblue") +
+  geom_point(aes(x = 0, y = 1), size = 3, col = "skyblue", pch = 21) +
+  labs(title = "G(y)",y = "", x = "") +
+  theme_bw() +
+  theme(plot.title = element_text(hjust = .5, face = "bold", size = 15),
+        panel.grid = element_blank(),
+        text = element_text(family = "serif")) 
+
 
 
 ```
@@ -317,6 +332,10 @@ G_n(y) &= P(Y_n \le y)\\
 ##### c) Explain why the authors state that G(y) being discontinuous (and not even right-continuous) at y = 0 ”is not a problem”. How does this connect with our explanations in the lecture notes on pages 1–2?
 
 
+> In the definition on page 1, it states that a sequence converges in distribution as long as "$\lim_{n \to \infty} G_n(y) = G(y)$ for all values of $y$ at which $G(y)$ is continuous." The authors can say that the fact that $G(y)$ is discontinous from the right at $y = 0$ "isn't a problem" because $G(y)$ is continous at the same points that $G_n(y)$ is continous. 
+
+
+\newpage 
 
 ### Problem 4
 
@@ -331,17 +350,57 @@ G_n(y) &= P(Y_n \le y)\\
 \begin{align*}
 G_n(Y) &=
 \begin{cases}
-  \left[ 1 - \frac{1}{n} e^{-y} \right]^n, & \text{when } y > \ln(n) \\
+  \left[ 1 - \frac{1}{n} e^{-y} \right]^n, & \text{when } y > - \ln(n) \\
   0, & \text{otherwise}
 \end{cases}
 \end{align*}
 
 
+\begin{align*}
+G_n(Y) &= P(Y_n \le y)\\
+&= P((1/θ)X_{n:n} − \ln(n) \le y)\\
+&= P(X_{n:n} \le \theta y + \theta \ln(n))\\
+&= P(X_1 \le \theta y + \theta \ln(n), ..., X_n \le \theta y + \theta \ln(n))\\
+&= P(X_1 \le \theta y + \theta \ln(n))...P(X_n \le \theta y + \theta \ln(n))\\
+&= [F( \theta y + \theta \ln(n))]^n\\
+&= [1 - e^{- 1/\theta(\theta y + \theta \ln(n))}]^n\\
+&= [1 - e^{-y - \ln (n)}]^n\\
+&= [1 - e^ye^{\ln(n)}]^n\\
+&= [1 - \frac{1}{n}e^{-y}]^n
+\end{align*}
+
+> Thus, 
+
+\begin{align*}
+G_n(Y) &=
+\begin{cases}
+  \left[ 1 - \frac{1}{n} e^{-y} \right]^n, & \text{when } y > 0 \\
+  0, & \text{otherwise}
+\end{cases}
+\end{align*}
+
 ##### b) Show that $\lim_{n \to \infty} G_n(Y) = G(Y)$, with $e^{-e^{-y}}$, where $- \infty < y < \infty$. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ##### c) Show that $G(Y)$ is a CDF. 
 
-
+\newpage
 
 ### Problem 5
 
