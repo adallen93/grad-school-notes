@@ -1,127 +1,518 @@
 ---
 title: "B705 - Homework 1"
-date: "January 16, 2024"
 author: "Austin Allen"
-format:
-  html:
-    self-contained: true
-    page-layout: full
-    title-block-banner: true
-    toc: true
-    toc-depth: 3
-    toc-location: body
-    number-sections: false
-    html-math-method: katex
-    code-fold: true
-    code-summary: "Show the code"
-    code-overflow: wrap
-    code-copy: hover
-    code-tools:
-        source: false
-        toggle: true
-        caption: See code
-execute: 
-  warning: false
-    
+date: "February 1, 2024"
+format: 
+  pdf:
+    latex_engine: xelatex
 ---
 
+```{r include = FALSE}
+library(tidyverse)
+library(plotly)
+library(knitr)
+library(here)
+library(pander)
+setwd(here())
+knitr::opts_chunk$set(fig.align = 'center', fig.height = 4, fig.width = 5, echo = TRUE, warning = FALSE, message = FALSE)
+my_theme = theme(plot.title = element_text(hjust = .5, face = "bold", size = 13.5),
+                 text = element_text(family = "serif"),
+                 panel.grid = element_blank())
+
+```
+
+```{r include = FALSE}
+
+# This code chunk is to get rid of a lot of code that isn't very readable by saving all the text for labels in my plots in lists to be added to the plots downstream
+
+labels_a <- list(geom_text(aes(x = .5, y = 44), label = "lm(formula = mpg ~ x, data = dat)", family = "serif", col = "firebrick"),
+  geom_text(aes(x = .25, y = 42), label = "Coefficients:", family = "serif", col = "firebrick"),
+  geom_text(aes(x = .5, y = 40), label = "Estimate Std. Error t value Pr(>|t|) ", family = "serif", col = "firebrick"),
+  geom_text(aes(x = .46, y = 38), label = "(Intercept)   24.513      1.021  24.009  < 2e-16 ***", family = "serif", col = "firebrick"),
+  geom_text(aes(x = .48, y = 36), label = "x             -8.844      1.444  -6.125 9.84e-07 ***", family = "serif", col = "firebrick"),
+  geom_text(aes(x = .48, y = 32), label = "Residual standard error: 4.084 on 30 degrees of freedom", family = "serif", col = "firebrick"),
+  geom_text(aes(x = .48, y = 30), label = "Multiple R-squared:  0.5557,	Adjusted R-squared:  0.5408 ", family = "serif", col = "firebrick"),
+  geom_text(aes(x = .48, y = 28), label = "F-statistic: 37.52 on 1 and 30 DF,  p-value: 9.837e-07", family = "serif", col = "firebrick") )
+
+
+labels_d <- list(geom_text(aes(x = 3.3, y = 51), label = "lm(formula = mpg ~ wt, data = dat)", family = "serif", col = "firebrick"),
+  geom_text(aes(x = 2, y = 49), label = "Coefficients:", family = "serif", col = "firebrick") ,
+  geom_text(aes(x =  3.3, y = 47), label = "Estimate Std. Error t value Pr(>|t|) ", family = "serif", col = "firebrick") ,
+  geom_text(aes(x = 3.1, y = 45), label = "(Intercept)  37.2851     1.8776  19.858  < 2e-16 ***", family = "serif", col = "firebrick") ,
+  geom_text(aes(x = 3.2, y = 43), label = "wt           -5.3445     0.5591  -9.559 1.29e-10 ***", family = "serif", col = "firebrick") ,
+  geom_text(aes(x = 3, y = 39), label = "Residual standard error: 3.046 on 30 degrees of freedom", family = "serif", col = "firebrick") ,
+  geom_text(aes(x = 3, y = 37), label = "Multiple R-squared:  0.7528,	Adjusted R-squared:  0.7446", family = "serif", col = "firebrick") ,
+  geom_text(aes(x = 3, y = 35), label = "F-statistic: 91.38 on 1 and 30 DF,  p-value: 1.294e-10", family = "serif", col = "firebrick") )
+
+```
 
 
 
-1. Given the Motor Trend Car Road Tests (mtcars) dataset (mtcars.csv):
+
+# 1. Given the Motor Trend Car Road Tests (mtcars) dataset (mtcars.csv):
 Let 
+
 \begin{align*}
-X_i = \left \{
-    \begin{array}{11} 
-        1 \text{if wt} > \text{ median}\\
-        0 \text{if wt} \le \text{ median}
-    \end{array}
-\right .
-wt = weight (1000 lbs)
-where Xis called an indicator or dummy variable
-In R typ e help(mtcars) will provide more details on the dataset and variables name.
-a) Fit a simple linear regression, using mpgi =  0 +  1 Xi + i ; how you interpret ^ 1
-in the context of the prob elm?
-b) Write the ab ove mo del in a matrix form (ie, Y= X + ). Identify the design
-matrix X.
-c) What is the estimated mean square errors (MSE)?
-d) Re-do part a using mpgi =  0 +  1 wti + i . How this results di er from part a?
-Which mo del would you recommend? why?
-e) Supp ose we  tted a mo del in part a by adding hp(horsep ower) and inetraction,
-ie mpgi =  0 +  1 Xi +  2 hpi +  3 Xi hpi + i . How would you interpret term? is
-this mo del additive?
-f ) Similarly, we added hpand interaction to the mo del in part e, ie mpgi =  0 +
- 1 wti +  2 hpi +  3 wti hpi + i . How should the interaction term b e interpreted
-in this mo del? Can we interpret the main e ects? why or why not?
-2. Stigler, History of Statistics pg.285 gives Galton's famous data on heights of son-
-s (Yin inches) and average parents height (Xin inches) scaled to represent a
-male height (essentially sons' heights versus fathers' heights). Data are given in
-parents offsprings.csv. Consider a statistical mo del for these data, randomly
-sampled from some p opulation of interest. In particular, cho ose a mo del which ac-
-counts for the apparent linear dep endence of the mean height of sons on midparent
-height X.
-a) Construct a scatterplot of these data.
-b) What is  1 ? Is this statistic or parameter?
-c) What is the estimated slop e ( ^ 1 )? Is this statistic or parameter?
-d) How much do es ^ 1 vary ab out  1 from sample to sample? (Provide an estimate
-of the standard error, as well as an expression indicating how it was computed)
-e) What is a region of plausible values for  1 suggested by the data?
-f ) What is the line that b est  ts these data, using criterion that smallest sum of
-squared residuals is "b est?"
-g) How much of the observed variation is the heights of sons (the y-axis) is explained
-by this "b est" line?
-h) What is the estimated average height of sons whose midparent height is x= 68?
-i) Is this the true average height in the whole p opulation of sons whose midparent
-height is x= 68?
-j) Under the mo del, what is the true average height of sons with midparent height
-is x= 68?
-k) What is the estimated standard deviation among the p opulation of sons whose
-midparent height is x= 68? Would you call this standard deviation a "standard
-error"?
-l) What is the estimated standard deviation among the p opulation of sons whose
-midparent height is x= 72? Bigger, smaller, or the same that for x= 68? Is your
-answer obviously supp orted or refuted by insp ection of the scatterplot?
-m) What is the estimated standard error of the estimated average for sons with
-midparent height x= 68;^(68) = ^ 0 + 68 ^ 1 ? Provide an expression for this
-standard error.
-n) Is the estimated standard error of ^(72) bigger, smaller, or the same as that for
-^(68)?
-o) Is the observed linear asso ciation b etween son's height and midparent height
-strong? Rep ort a test statistic.
-p) What quantity can you use to describ e or characterize the linear asso ciation b e-
-tween son's height and midparent height in the whole p opulation? Is this a pa-
-rameter or a statistic?
-Page2
-3. Consider data on corn yield Y(bushels/acre) and rainfall X(inches/yr) in six Mid-
-western states recorded from 1890 to 1927. Data are given in corn yield and rainfall.csv.
-a) Construct a scatterplot of corn yield and rainfall measurements.
-b) How can we describ e the asso ciation b etween yield and rainfall? Do es it app ear
-linear?
-c) How can we measure the strength of linear asso ciation?
-d) To what degree the variability in yield describ ed or explained by its asso ciation
-with rainfall? In what units this variability measured?
-e) How can we use this asso ciation to estimate average yield, given a certain level of
-rainfall, say 14 inches/yr?
-f ) How can we use this asso ciation to predict future yield, if we have an idea ab out
-what the rainfall will b e? use x0 = 14 (inches/yr).
-g) What is the di erence b etween e and f ?
-h) What prop ortion of variance in yield is explained by the linear regression mo del?.
-Page3
-4. An investigator wants to examine the relationship b etween b o dy temp erature yand
-heart rate x. Further, he would like to use heart rate to predict the b o dy temp erature.
-(Data Bo dyTemp erature.csv).
-a) Construct a simple linear regression mo del for b o dy temp erature using heart rate
-as the predictor.
-b) Interpret the estimated slop e ( ^ 1 ) and examine its statistical signi cance.
-c) Construct the 95% con dence interval for the p opulation slop e  1 . How would
-you interpret this CI and do es it agree with your conclusion in part (b)?
-d) Calculate adjusted R2 , what is tell us ab out the contribution of heart rate in the
-mo del?
-e) If someones heart rate is 75, what would b e your estimate of this p ersons b o dy
-temp erature?
-f ) Supp ose the investigator b elieve that adding sex to the mo del in part (a) will
-improve mo del prediction, is he correct? how would you quantify the contribution
-of sex to the mo del?
-g) Supp ose theinvestigator added an interaction b etween heart rate and sex to the
-mo del in part (f ), how would you Interpret this interaction term?
-Page4
+X_i = 
+\begin{cases}
+  1 \text{,  if *wt} > \text{ median}\\
+  0 \text{,  if wt} \le \text{ median}
+\end{cases}
+\end{align*}
+
+where $X$ is called an indicator or dummy variable.
+
+*In R type help(mtcars) will provide more details on the dataset and variables name.*
+
+*wt = weight (1000 lbs)
+
+
+### a) Fit a simple linear regression, using $\text{mpg}_i = \beta_0 + \beta_1 X_i + \epsilon$. How would you interpret $\hat{\beta_1}$ in the context of the problem?
+
+
+```{r}
+# Read in data
+dat <- read.csv("mtcars.csv")
+# Create indicator variable X
+dat$x <- as.numeric(dat$wt > median(dat$wt))
+# Create model
+model_a <- lm(mpg ~ x, data = dat)
+# Create a plot
+ggplot(dat) +
+  geom_point(aes(x = x, y = mpg), size = 1.2, col = "skyblue") +
+  geom_smooth(aes(x = x, y = mpg), method = "lm", se = FALSE, col = "firebrick", lwd = .5) +
+  labs(x = "Weight > Median Weight (3,325 lbs)", y = "Miles per Gallon", title = "Looking at MPG Above and Below Median Weight") +  
+  scale_x_continuous(breaks = c(0, 1)) +
+  theme_bw() +
+  labels_a +
+  my_theme
+```
+
+> Based on the model output, as $x$ increases by 1, the estimated value of $mpg$ decreases by 8.844. Another way to say this is that we expect cars that weigh over 3,325 pounds to get 8.844 less miles for every gallon than cars below the median weight of 3,325 pounds. 
+
+
+### b) Write the above model in a matrix form (ie, $Y= X \beta + \epsilon$). Identify the design matrix $X$.
+
+$$
+\text{mpg} = X \beta + \epsilon
+$$
+> $X$ is the design matrix containing two columns ($p + 1$ or total number of parameters in the model). The first column contains only 1's to be multiplied by $\beta_0$. The second column contains 1's and 0's corresponding to the vehicle with the weight above the median weight. Here's what this matrix looks like:
+
+| | Intercept | $X$|
+|--|------|----|
+|1 | 1|0|
+|2| 1|0|
+|...|...|...|
+|32|1|1|
+
+
+
+
+### c) What is the estimated mean square errors (MSE)?
+
+> The estimated `MSE` can be calculated from the summary from `R` shown on the plot above. The `residual standard error` is the square root of the estimated `MSE`, so by squaring this term we get an estimated $\text{MSE} = 4.084^2 = 16.68$. 
+
+
+### d) Re-do part a) using $\text{mpg}_i = \beta_0 + \beta_1 \text{wt}_i + \epsilon_i$. How does this results differ from part a)? Which model would you recommend? why?
+
+```{r}
+# Create model
+model_d <- lm(mpg ~ wt, data = dat)
+# Create a plot
+ggplot(dat) +
+  geom_point(aes(x = wt, y = mpg), size = 1.2, col = "skyblue") +
+  geom_smooth(aes(x = wt, y = mpg), method = "lm", se = FALSE, col = "firebrick", lwd = .75) +
+  labs(x = "wt (Weight, 1,000 lbs)", y = "mpg (Miles per Gallon)", title = "A Second Look at MPG with Continuous Weight") +  
+  theme_bw() +
+  labels_d +
+  my_theme
+```
+
+> While both slopes are significant, treating `wt` as a continuous variable increases $R^2$ by over 20%. That's an incredible amount of information that is lost when we dichotomize `wt`. I recommend treating `wt` as a continuous variable, as is show in the model produced in part d). 
+
+
+### e) Suppose we fitted a model in part a) by adding hp (horse power) and an interaction, i.e. $\text{mpgi}_i =  \beta_0 + \beta_1 X_i +  \beta_2 \text{hp}_i +  \beta_3 X_i \text{hp}_i + \epsilon_i$. How would you interpret each term? Is this model additive?
+
+> Let's look at a summary of the model created in R:
+
+```{r}
+# Create model
+model_e <- lm(mpg ~ x + hp + x*hp, data = dat)
+
+# Print summary of model
+summary(model_e)
+```
+
+> Because the interaction term is significant, this model is not additive. That means that we cannot interpret each term independently because X and hp depend on each other. 
+> 
+> To interpret this model, we can rearrange the terms as follows:
+
+\begin{align*}
+\hat{\text{mpg}} &= 31.81 - 11.5 X - 0.07 \text{hp} + 0.05 X\text{hp}_i\\
+&= 31.81 - 11.5 X - hp(0.07 - 0.05X)\\
+&= 31.81 - 0.07\text{hp} - X(11.5 - 0.05hp)
+\end{align*}
+
+> Here's a summary of how to interpret each term:
+> 
+> * To interpret hp, we hold X constant (equation 2) and say that for constant x, the effect of hp on mpg is -(0.07 - 0.05) = -0.02.
+> * To interpret X, we hold hp constant (equation 3) and say that for constant hp, the effect of X on mpg is -(11.5 - 0.05) = -11.45.
+
+
+### f) Similarly, we added hp and an interaction to the model in part e), i.e. $\text{mpg}_i =  \beta_0 + \beta_1 \text{wt}_i +  \beta_2 \text{hp}_i + \beta_3 \text{wt}_i \text{hp}_i + \epsilon_i$. How should the interaction term be interpreted in this model? Can we interpret the main effects? why or why not?
+
+> The real question here is how the interpretation of the interaction changes when we moved from a dichotomized variable (x = wt > median(wt)) to a continuous variable (wt). 
+> 
+> Let's look at a summary of the `lm()` statement in `R`:
+
+```{r}
+# Create model
+model_f <- lm(mpg ~ wt + hp + wt*hp, data = dat)
+
+# Print summary of model
+summary(model_f)
+```
+
+
+> You'll notice the interaction term has a p-value that is much lower than the p-value of the interaction of the dichotomized model. 
+> 
+> We interpret the model exactly how we did in part e as follows: 
+
+\begin{align*}
+\hat{\text{mpg}} &= 49.8 - 8.2 wt - 0.12 \text{hp} + 0.02 wt\text{hp}_i\\
+&= 49.8 - 8.2 wt - hp(0.12 - 0.02 wt)\\
+&= 49.8 - 0.12\text{hp} - wt(8.2 - 0.02 hp)
+\end{align*}
+
+
+\newpage
+
+# 2. Stigler, History of Statistics pg.285 gives Galton's famous data on heights of sons ($Y$ in inches) and average parents height ($X$ in inches) scaled to represent a male height (essentially sons' heights versus fathers' heights). Data are given in `parents_offsprings.csv`. Consider a statistical model for these data, randomly sampled from some population of interest. In particular, choose a model which accounts for the apparent linear dependence of the mean height of sons on midparent height $X$.
+
+### a) Construct a scatterplot of these data.
+
+```{r}
+# Load the data
+dat <- read.csv("parents_offsprings.csv")
+# Create a scatterplot
+ggplot(dat) +
+  geom_point(aes(x = midparent_height, y = offspring_height), col = "skyblue", size = .8) +
+  geom_smooth(method = "lm", aes(x = midparent_height, y = offspring_height), col = "firebrick", lwd = .75, se = FALSE) +
+  labs(x = "Mid-parent Height", y = "Offspring Height", title = "Scatterplot showing Mid-parent Height vs Offspring Height") +
+  theme_bw() +
+  my_theme
+```
+
+
+### b) What is $\beta_1$? Is this statistic or parameter?
+
+> $\beta_1$ is the parameter that defines the *true* relationship (i.e. slope) between a mid-parent's height and the offspring's height for individuals in our source population. It is unknown, unless we can measure every indiviual in the population, which we cannot do. It is a parameter, not a statistic.
+
+### c) What is the estimated slope ($\hat{\beta_1}$)? Is this statistic or parameter?
+
+> The estimated slope, $\hat{\beta_1}$, is a point estimate for the parameter $\beta_1$ defined above. We can actually calculate this estimate by hand, or we can have `R` do it for us. Let's take the easier road and let our computer do the heavy lifting.
+
+```{r}
+# Create model
+model_c <- lm(offspring_height ~ midparent_height, data = dat)
+# Pring model summary
+summary(model_c)
+```
+
+> In the summary output shown above, $\hat{\beta_1}$ is shown in the `Coefficients` table in the `Estimates` column and `midparent_height` column. You can see that our point estimate is 0.646. This is a statistic calculated from our data which estimates the true parameter, $\beta_1$.
+
+
+### d) How much does $\hat{\beta_1}$ vary about  $\beta_1$ from sample to sample? (Provide an estimate of the standard error, as well as an expression indicating how it was computed)
+
+
+> Again, from the output in `R`, the point estimate for the standard error of $\hat{\beta_1}$ is 0.041.
+> The expression for calculating $\hat{\sigma_{\hat{\beta_1}}}$ can be given as follows: $\hat{\sigma_{\hat{\beta_1}}} =  \sqrt{\frac{\text{SSE}}{(n - 2) \cdot S^2X}}$
+>
+> Just for fun, let's attempt to calculate this with some `R` code:
+
+```{r}
+# Set variables
+n <- nrow(dat)
+sse <- sum( (dat$offspring_height - model_c$fitted.values)^2 )
+s_squared_x <- sum( (dat$midparent_height - mean(dat$midparent_height))^2)
+# Calculate point estimate for the standard error
+se_bh1 <- sqrt( sse/( (n - 2) *(s_squared_x) ) )
+```
+
+> The output is 0.041, which is the same as the ouput in the R summary.
+
+### e) What is a region of plausible values for $\beta_1$ suggested by the data?
+
+> Let's look at a region of plausible values for this parameter by calculating a 95% confidence interval:
+
+
+```{r}
+# Set variables
+bh1 <- 0.64629 # from summary output
+t <-  qt(c(.05/2, 1-.05/2), (n - 2)) # desired range
+se <- 0.04114 # from summary output
+
+confint <- bh1 + t * se
+```
+
+> From my calculation, the 95% confidence interval is [0.566, 0.727].
+
+
+
+
+### f ) What is the line that best fits these data, using the criterion that the smallest sum of squared residuals is "best?"
+
+
+> The line that best fits these data according to the criterion given can actually be taken from the `R` output as well:
+
+<!-- \begin{align*} -->
+<!-- {\hat{\text{offspring_height}}} = 23.942 + 0.646 \cdot \text{midparent_height} -->
+<!-- \end{align*} -->
+
+$$\hat{\text{offspring\_height}} = 23.942 + 0.646 \cdot \text{midparent\_height}$$
+
+
+### g) How much of the observed variation in the heights of sons (the y-axis) is explained by this "best" line?
+
+> The $R^2$ value for this model is 0.211. That means that roughly 21% of the variation in the height of sons is explained by the height of the parents, which is surprisingly low, in my opinion.
+
+### h) What is the estimated average height of sons whose midparent height is $x= 68$?
+
+> Using the "best" line in the previous answer, we can calculate it easily.
+
+```{r}
+# Calculate predicted height
+predicted_height <- 23.942 + 0.646 * 68
+```
+
+> The estimated average heigh of sons whose midparent height is $x= 68$ is 67.87.
+
+
+### i) Is this the true average height in the whole population of sons whose midparent height is $x= 68$?
+
+> No, it's not! We would need to know the values of $\beta_0$ and $\beta_1$ to know the true average height. Our line is the "hat" line, so to speak. It's just an estimate.
+
+### j) Under the model, what is the true average height of sons with midparent height is $x= 68$?
+
+$$
+\mu_{68} = \beta_0 + \beta_1 \cdot 68
+$$
+
+
+### k) What is the estimated standard deviation among the population of sons whose midparent height is $x= 68$? Would you call this standard deviation a "standard error"?
+
+> This is the same thing as $S_{Y.X}$, which is 2.239. I would not call this a standard error because it estimates general variability and isn't used to estimate the variability of a sampling distribution.
+
+### l) What is the estimated standard deviation among the population of sons whose midparent height is $x= 72?$ Bigger, smaller, or the same that for $x= 68$? Is your answer obviously supported or refuted by inspection of the scatterplot?
+
+> One assumption we make in linear regression is that the variance is constant for all error terms. This implies that the standard deviation among the population of sons whose midparent height is $x = 72$ will be the same as that of those whose midparent height is $x = 68$, which is 2.239. This isn't obvious when looking at the scatterplot, because it looks to me like the variability is lower around 68 at 72. Variance may not be constant after all, but in my opinion it's not strong enough to say either way.
+
+### m) What is the estimated standard error of the estimated average for sons with midparent height $x= 68$, $\hat{\mu}(68) = \hat{\beta_0} + 68 \hat{\beta_1}$? Provide an expression for this standard error.
+
+> This can be calculated as follows:
+
+\begin{align*}
+\hat{Var(\hat{\mu(68)})} &= S_{Y.X}^2 [1/n + (68 - \bar{X})^2/(\sum_{i = 1}^n (X_i - \bar{X})^2)]\\
+&= 5.01 [1/928 + (68 - 68.31)^2/2961.36]\\
+&= 0.00556
+\end{align*}
+
+
+### n) Is the estimated standard error of $\hat{\mu}(72)$ bigger, smaller, or the same as that for $\hat{\mu}(68)$?
+
+\begin{align*}
+\hat{Var(\hat{\mu(72)})} &= S_{Y.X}^2 [1/n + (72 - \bar{X})^2/(\sum_{i = 1}^n (X_i - \bar{X})^2)]\\
+&= 5.01 [1/928 + (72 - 68.31)^2/2961.36]\\
+&= 0.0285
+\end{align*}
+
+> This is a little bigger because we're a little further away from $\bar{X}$.
+
+### o) Is the observed linear association between son's height and midparent height strong? Report a test statistic.
+
+> We can think about this association by testing the following hypothesis:
+
+$$
+H_0: \beta_1 = 0\\
+H_A: \beta_1 \ne 0
+$$
+
+> In the summary output, we see that the test statistic for the slope estimate is 15.711, yielding a p-value of 2e-16. This p-value is extremely small, indicating that we would reject the null hypothesis. There appears to be a linear relationship.
+
+
+### p) What quantity can you use to describe or characterize the linear association between son's height and midparent height in the whole population? Is this a parameter or a statistic?
+
+> $\beta_1$ is the slope of the true regression line, and it describes the association between son's height and midparent height. It is a parameter.
+
+
+\newpage
+
+
+# 3. Consider data on corn yield $Y$ (bushels/acre) and rainfall $X$ (inches/yr) in six Midwestern states recorded from 1890 to 1927. Data are given in `corn_yield_and_rainfall.csv`.
+
+### a) Construct a scatterplot of corn yield and rainfall measurements.
+
+```{r}
+# Load in the data
+dat <- read.csv("corn_yield_and_rainfall.csv")
+# Create a scatterplot
+ggplot(dat) +
+  geom_point(aes(x = Rainfall, y = Yield), col = "skyblue", size = .8) +
+  geom_smooth(method = "lm", aes(x = Rainfall, y = Yield), col = "firebrick", lwd = .75, se = FALSE) +
+  labs(x = "Rainfall (inches/year)", y = "Corn Yield (bushels/acre)", title = "Scatterplot of Corn Yield and Rainfall Data") +
+  theme_bw() +
+  my_theme
+```
+
+
+### b) How can we describe the association between yield and rainfall? Does it appear linear?
+
+> Looking at the scatter plot, I'm concerned that there's some non-linearity in this plot. The data suggest to me to have some sort of negative quadratic relationship. It seems like optimal rainfall is around 11 inches per year, and anything above or below that is associated with lower corn yield.
+>
+> While this is something to be concerned about, I'm going to print the summary of the linear model between yield and rainfall below to assist me with subsequent questions:
+
+```{r}
+# Create model
+model_b <- lm(Yield~ Rainfall, data = dat)
+# Print summary
+summary(model_b)
+
+```
+
+
+### c) How can we measure the strength of the linear association?
+
+> One way to measure the strength of the linear association is by looking at the $R^2$ value. The $R^2$ value in this model is 0.162, which is quite low.
+
+### d) To what degree is the variability in yield is described or explained by its association with rainfall? In what units is this variability measured?
+
+> We can use adjusted $R^2$ to answer this question.
+>
+> Based on the adjusted R-squared value of 0.139, approximately 13.9% of the variability in yield can be explained by its association with rainfall. R-squared is unitless, indicating the proportion of explained variability. However, if the question refers to the units of the actual yield values used in the analysis, the units of the variance of the yield would be $\frac{\text{inches}^2}{\text{years}^2}$
+
+### e) How can we use this association to estimate average yield, given a certain level of rainfall, say 14 inches/yr?
+
+> We can use the `lm` function in `R` to estimate average yield given a certain level of rainfall. I will show how to calculate a confidence interval in `R`:
+
+```{r}
+# Calculate confidence interval
+prediction <- predict(model_b, newdata = data.frame(Rainfall = 14), interval = "confidence")
+print(prediction)
+```
+
+
+> This shows that the estimated mean yield given 14 inches of rain is 34.4, with a lower bound of a 95% confidence interval being 32.1 and the upper bound of the interval being 36.7.
+
+### f ) How can we use this association to predict future yield, if we have an idea about what the rainfall will be? use $x_0 = 14$ (inches/yr).
+
+> Again, we can use the `lm` and `predict` functions in `R` to make this prediction (I will also include a 95% confidence interval):
+
+```{r}
+# Calculate confidence interval
+prediction <- predict(model_b, newdata = data.frame(Rainfall = 14), interval = "prediction")
+print(prediction)
+```
+
+
+> The estimate is exactly the same, but the confidence interval is from 25.9 to 42.9, which is a much larger interval.
+
+### g) What is the difference between e) and f) ?
+
+> The difference is that part e) is estimating an average and part f) is estimating a single crop yield. The way I think of it is that our confidence interval for the mean is based on the sampling distribution for $\bar{Y}$ which has variance $Var(\bar{Y}) = \sigma^2/n$, whereas the confidence interval for a single crop yield is based on the population distribution, which has variance $Var(Y) = \sigma^2$. Thus, the variance is greater for a single crop yield "yielding" a wider confidence interval.
+
+### h) What proportion of variance in yield is explained by the linear regression model?
+
+> The model's $R^2$ value is 0.162. Thus, approximately 16.2% of variance in yield is explained by the linear regression model.
+
+
+
+\newpage
+
+# 4. An investigator wants to examine the relationship between body temperature $Y$ and heart rate $X$. Further, he would like to use heart rate to predict the body temperature. (Data in `BodyTemperature.csv`).
+
+
+### a) Construct a simple linear regression model for body temperature using heart rate as the predictor.
+
+```{r}
+# Load in the data
+dat <- read.csv("BodyTemperature.csv")
+# Create model
+model_a <- lm(Temperature ~ HeartRate, data = dat)
+```
+
+
+$$
+\text{BodyTemperature}_i = \beta_0 + \beta_1 \text{HeartRate}_i + \epsilon_i
+$$
+
+### b) Interpret the estimated slope ($\hat{\beta_1}$) and examine its statistical significance.
+
+> The estimated slope in our model is 0.08. This means that for every unit increase in HeartRate, we expect an increase of 0.08 degrees in body temperature. The p-value is at 3.01e-06, indicating statistical significance.
+
+> .08, is significant
+
+### c) Construct the 95% confidence interval for the population slope $\beta_1$. How would you interpret this CI and do es it agree with your conclusion in part (b)?
+
+```{r}
+# Define variables
+bh1 <- 0.08063 # from summary output
+t <- qt(c(.05/2, 1 - .05/2), df = nrow(dat) - 1)
+se <- 0.016 # from summary output
+
+confint <- bh1 + t * se
+```
+
+> The 95% confidence interval for the population slope is [0.049, 0.112]. Thus, we are 95% confident that the true slope is between these values. This supports my conclusion in the previous response because 0 is not contained in the interval.
+
+### d) Calculate adjusted $R^2$, what does this tell us about the contribution of heart rate in the model?
+
+> Adjusted $R^2$ can be calculated with the following formula:
+
+\begin{align*}
+R^2_{\text{Adjusted}} &= 1 - \frac{\text{SSE}(n - 1)}{\text{SST}(n - 2)}\\
+&= 1 - \frac{\text{72.48}(99)}{\text{90.65}(99)}\\
+&= 0.192
+\end{align*}
+
+> Thus, HeartRate explains roughly 19.2% of the variability in Temperature.
+
+
+### e) If someone's heart rate is 75, what would be your estimate of this persons body temperature?
+
+\begin{align*}
+\text{Estimated Temperature} = 92.39 + 0.0806 \text{HeartRate}\\
+&= 92.39 + 0.0806 \text{75}\\
+&= 98.44
+\end{align*}
+
+> Thus, the estimated termperature given a heart rate of 75 is 98.44.
+
+### f) Suppose the investigator believes that adding sex to the model in part (a) will improve model prediction. Is he correct? How would you quantify the contribution of sex to the model?
+
+```{r}
+# Add sex to model
+model_f <- lm(Temperature ~ HeartRate + Sex, data = dat)
+# Print summary of new model
+summary(model_f)
+```
+
+
+> He was correct! Our adjusted $R^2$ increased by 0.017. This constitutes an additional 1.7% percent of explanation in the model.
+
+### g) Suppose the investigator added an interaction between heart rate and sex to the model in part (f), how would you Interpret this interaction term?
+
+```{r}
+# Add sex to model
+model_g <- lm(Temperature ~ HeartRate + Sex + HeartRate*Sex, data = dat)
+# Print summary of new model
+summary(model_g)
+```
+
+
+
+> Unfortunately, the interaction term is not significant, so it does not offer any interpretable value.
+
+
+
+
+
