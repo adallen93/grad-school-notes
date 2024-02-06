@@ -1,0 +1,34 @@
+---
+
+---
+
+
+
+**The ASCCR Frame for Learning Essential Collaboration Skills**
+
+* These skills are learnable and teachable, and learning and improving collaboration skills provides a way to enjance one's practice of statistics and data science. 
+
+**Research Mediterranean Diet have an association with Colon Cancer**
+
+* Mediterranean diet score
+    - Vegetables
+    - Fruits
+    - Low-fat or non-fat dairy 
+    - Regular dairy
+    - Fish
+    - poultry
+    - Red meat
+    - Beans
+    - Nuts and healthy oils
+    - Other fats
+    - Sweets and procesed foods
+    - Whole grains and potatoes
+
+**NHANES Data**
+
+* National health and nutrition examination survey (nhane) 
+* Dietary screener questionnaire was included in the 2009-2010 cycle of nhanes (n = 8,4) for the national cancer institute1)
+* questions asked 
+
+thomas.redding28@va.gov
+april.williams9@va.gov
