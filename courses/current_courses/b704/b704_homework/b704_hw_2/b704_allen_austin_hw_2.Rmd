@@ -1,0 +1,33 @@
+---
+title: "BIOSTAT 704 - Homework 2"
+author: "Austin Allen"
+date: "February 6, 2024"
+output:
+    pdf_document:
+        latex_engine: xelatex
+---
+
+## Problem 1
+
+**Part (a)**
+
+> To calculate this probability, we're going to rely on the central limit theorem. We will let $Z = \frac{\bar{Y}_n - \mu}{\sigma/\sqrt{n}} =  \frac{\bar{Y}_n - 132}{5.14/\sqrt{500}}$. 
+
+\begin{align*}
+P(\bar{Y}_n \ge 200) &= P(\frac{\bar{Y}_n - 132}{0.23} \ge \frac{200 - 132}{0.23})\\
+&= 1 - P(\frac{\bar{Y}_n - 132}{0.23} < \frac{200 - 132}{0.23})\\
+&= 1 - P(Z < 295.9)\\
+&= 0
+\end{align*}
+
+**Part (b)**
+
+
+
+## Problem 2
+
+
+## Problem 3
+
+
+## Problem 4
