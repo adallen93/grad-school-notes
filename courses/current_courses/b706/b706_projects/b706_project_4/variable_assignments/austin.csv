@@ -1,0 +1,51 @@
+,X,current_variable_name,new_variable_name,description
+1,1,B4BAC,blood_alpha-carotene_(umol/l),Blood alpha-carotene (umol/L)
+2,2,B4BATBC,blood_all_trans-beta-carotene_(umol/l),Blood All trans-beta-carotene (umol/L)
+3,3,B4BLYC,blood_total_lycopene_(umol/l),Blood Total Lycopene (umol/L)
+4,4,B4BGTOC,blood_gamma-tocopherol_(umol/l),Blood gamma-tocopherol (umol/L)
+5,5,B4BATOC,blood_alpha-tocopherol_(umol/l),Blood alpha-tocopherol (umol/L)
+6,6,B4BRET,blood_retinol_(umol/l),Blood Retinol (umol/L)
+7,7,B4BSNTX,blood_n-telopeptide_type_1_collagen_(nm_bce),Blood n-Telopeptide type 1 collagen (nM BCE)
+8,8,B4BSBAP,blood_bone_specific_alkaline_phosphatase_(ul),Blood Bone Specific Alkaline Phosphatase (UL)
+9,9,B4BP1NP,blood_amino_terminal_propeptide_type_1_procollagen_(ugl),Blood Amino terminal Propeptide type 1 Procollagen (ugL)
+10,10,B4BHOMAIR,homa-ir:_(b4bgluc*b4binsln)/405,HOMA-IR: (B4BGLUC*B4BINSLN)/405
+11,11,B4ZURINE,biomarker_urine_sample_status,Biomarker urine sample status
+12,12,B4BUPROB,urine_collection_period_abnormal,Urine collection period less than 11 hours or greater than 13 hours?
+13,13,B4BUSTRT,urine_collection_start_time,Urine Collection Start Time
+14,14,B4BUEND,urine_collection_end_time,Urine Collection End Time
+15,15,B4BUVDYN,any_voids_not_collected?,Any voids not collected?
+16,16,B4BUVDN,number_voids_not_collected,Number voids not collected
+17,17,B4BURVOL,urine_volume_(ml),Urine Volume (ml)
+18,18,B4BCORTL,urine_cortisol_(ug/dl),Urine Cortisol (ug/dL)
+19,19,B4BCORTO,urine_cortisone_(ug/dl),Urine Cortisone (ug/dL)
+20,20,B4BUCREA,urine_creatinine_(mg/dl),Urine Creatinine (mg/dL)
+21,21,B4BSUCRE,ratio_serum_creatinine_to_urine_creatinine,Ratio Serum Creatinine /Urine Creatinine
+22,22,B4BGFR,glomerular_filtration_rate_(ml/min),Glomerular Filtration Rate (ml/min)
+23,23,B4BCLCRE,urine_cortisol_adjusted_for_urine_creatinine_(ug/g),Urine Cortisol adjusted for Urine Creatinine (ug/g)
+24,24,B4BCOCRE,urine_cortisone_adjusted_for_urine_creatinine_(ug/g),Urine Cortisone adjusted for Urine Creatinine (ug/g)
+25,25,B4BNECL,ratio_urine_norepinephrine/cortiso,Ratio Urine Norepinephrine/Cortiso
+26,26,B4BNOREP,urine_norepinephrine_(ug/dl),Urine Norepinephrine (ug/dL)
+27,27,B4BEPIN,urine_epinephrine_(ug/dl),Urine Epinephrine (ug/dL)
+28,28,B4BDOPA,urine_dopamine_(ug/dl),Urine Dopamine (ug/dL)
+29,29,B4BNE12,urine_norepinephrine_12_hour_(ug/12h),Urine Norepinephrine 12 hour (ug/12h)
+30,30,B4BEPI12,urine_epinephrine_12_hour_(ug/12h),Urine Epinephrine 12 hour (ug/12h)
+31,31,B4BDOP12,urine_dopamine_12_hour_(ug/12h),Urine Dopamine 12 hour (ug/12h)
+32,32,B4BNOCRE,urine_norepinephrine_adjusted_for_urine_creatinine_(ug/g),Urine Norepinephrine adjusted for Urine Creatinine (ug/g)
+33,33,B4BEPCRE,urine_epinephrine_adjusted_for_urine_creatinine_(ug/g),Urine Epinephrine adjusted for Urine Creatinine (ug/g)
+34,34,B4BDOCRE,urine_dopamine_adjusted_for_urine_creatinine_(ug/g),Urine Dopamine adjusted for Urine Creatinine (ug/g)
+35,35,B4ZSALIVA,biomarker_saliva_sample_status,Biomarker saliva sample status
+36,36,B4BSCL11,saliva_cortisol_baseline_dupl#1_(nmol/l),Saliva cortisol baseline dupl#1 (nmol/L)
+37,37,B4BSCL21,saliva_cortisol_post-cognitive_dupl#1_(nmol/l),Saliva cortisol post-cognitive dupl#1 (nmol/L)
+38,38,B4BSCL31,saliva_cortisol_post-orthostatic_dupl#1_(nmol/l),Saliva cortisol Post-orthostatic dupl#1 (nmol/L)
+39,39,B4BSCL41,saliva_cortisol_final_dupl#1_(nmol/l),Saliva cortisol final dupl#1 (nmol/L)
+40,40,B4BSDUP,was_this_sample_run_in_duplicate?,Was this sample run in duplicate?
+41,41,B4BSCL12,saliva_cortisol_baseline_dupl#2_(nmol/l),Saliva cortisol baseline dupl#2 (nmol/L)
+42,42,B4BSCL22,saliva_cortisol_post-cognitive_dupl#2_(nmol/l),Saliva cortisol Post-cognitive dupl#2 (nmol/L)
+43,43,B4BSCL32,saliva_cortisol_post-orthostatic_dupl#2_(nmol/l),Saliva cortisol Post-orthostatic dupl#2 (nmol/L)
+44,44,B4BSCL42,saliva_cortisol_final_dupl#2_(nmol/l),Saliva cortisol final dupl#2 (nmol/L)
+45,45,B4BSCL1A,saliva_cortisol_baseline_average_(nmol/l),Saliva cortisol baseline average (nmol/L)
+46,46,B4BSCL2A,saliva_cortisol_post-cognitive_average_(nmol/l),Saliva cortisol Post-cognitive average (nmol/L)
+47,47,B4BSCL3A,saliva_cortisol_post-orthostatic_average_(nmol/l),Saliva cortisol Post-orthostatic average (nmol/L)
+48,48,B4BSCL4A,saliva_cortisol_final_average_(nmol/l),Saliva cortisol final average (nmol/L)
+49,49,B4BSCL14,saliva_cortisol_all_sample_average_(nmol/l),Saliva cortisol All Sample average (nmol/L)
+50,50,MIDUS3,midus3,MIDUS3

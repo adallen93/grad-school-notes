@@ -1,0 +1,253 @@
+---
+title: "BIOSTAT 706 Project 3"
+author: "Group 3"
+date: "2024-02-07"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(haven)
+library(tidyverse)
+library(table1)
+```
+
+## Reading in Data and Creating Analytic Dataset
+
+```{r}
+setwd("/Users/oj/Desktop/BIOSTAT 706/Project 3")
+food <- read_sas("ffq_demo_final.sas7bdat")
+
+# creating analytic dataset
+food_analytic <- food %>% 
+  # removing variables that we are not interested in
+  select(-c(SEQN, DTD010Q, DTQ010U, DTDCER, DTQ020A, DTD020AF, DTQ020B, DTD020BF, 
+            DTD150Q, DTQ150U, DTD160Q, DTQ160U, DTD260Q, DTQ260U)) %>%
+  # renaming columns
+  rename(milk_Q = DTD030Q, milk_U = DTQ030U, # milk
+         soda_Q = DTD040Q, soda_U = DTQ040U, # soft drinks
+         fruitjuice_Q = DTD050Q, fruitjuice_U = DTQ050U, # fruit juice
+         coffeetea_Q = DTD060Q, coffeetea_U = DTQ060U, # coffee or tea
+         sportsenergy_Q = DTD070Q, sportsenergy_U = DTQ070U, # fruit, sports, or energy drinks
+         fruit_Q = DTD080Q, fruit_U = DTQ080U, # fruit
+         salad_Q = DTD090Q, salad_U = DTQ090U, # salad
+         friedpotato_Q = DTD100Q, friedpotato_U = DTQ100U, # fried potatoes
+         nonfriedpotato_Q = DTD110Q, nonfriedpotato_U = DTQ110U, # non-fried potatoes
+         beans_Q = DTD120Q, beans_U = DTQ120U, # beans
+         vegetables_Q = DTD130Q, vegetables_U = DTQ130U, # vegetables
+         pizza_Q = DTD140Q, pizza_U = DTQ140U, # pizza
+         redmeat_Q = DTD170Q, redmeat_U = DTQ170U, # red meat
+         processedmeat_Q = DTD180Q, processedmeat_U = DTQ180U, # processed meats
+         cheese_Q = DTD190Q, cheese_U = DTQ190U, # cheese
+         bread_Q = DTD200Q, bread_U = DTQ200U, # whole grain bread
+         grains_Q = DTD210Q, grains_U = DTQ210U, # cooked whole grains
+         choccandy_Q = DTD220Q, choccandy_U = DTQ220U, # chocolate and candy
+         pastries_Q = DTD230Q, pastries_U = DTQ230U, # pastries
+         cookiescake_Q = DTD240Q, cookiescake_U = DTQ240U, # cookies and cake
+         icecream_Q = DTD250Q, icecream_U = DTQ250U, # ice cream
+)
+```
+
+## Data Cleaning and Coding
+
+```{r}
+# recoding quantities so that day/month answers are in servings/week
+food_recoded <- food_analytic %>%
+  mutate(
+    milk_Q = case_when(
+      milk_U == 1 ~ milk_Q * 7,
+      milk_U == 2 ~ milk_Q,
+      milk_U == 3 ~ milk_Q / 4.345,
+      milk_U %in% c(7, 9, .) ~ NA,
+      milk_Q %in% c(777, 999, .) ~ NA),
+    soda_Q = case_when(
+      soda_U == 1 ~ soda_Q * 7,
+      soda_U == 2 ~ soda_Q,
+      soda_U == 3 ~ soda_Q / 4.345,
+      soda_U %in% c(7, 9, .) ~ NA,
+      soda_Q %in% c(777, 999, .) ~ NA),
+    fruitjuice_Q = case_when(
+      fruitjuice_U == 1 ~ fruitjuice_Q * 7,
+      fruitjuice_U == 2 ~ fruitjuice_Q,
+      fruitjuice_U == 3 ~ fruitjuice_Q / 4.345,
+      fruitjuice_U %in% c(7, 9, .) ~ NA,
+      fruitjuice_Q %in% c(777, 999, .) ~ NA),
+    coffeetea_Q = case_when(
+      coffeetea_U == 1 ~ coffeetea_Q * 7,
+      coffeetea_U == 2 ~ coffeetea_Q,
+      coffeetea_U == 3 ~ coffeetea_Q / 4.345,
+      coffeetea_U %in% c(7, 9, .) ~ NA,
+      coffeetea_Q %in% c(777, 999, .) ~ NA),
+    sportsenergy_Q = case_when(
+      sportsenergy_U == 1 ~ sportsenergy_Q * 7,
+      sportsenergy_U == 2 ~ sportsenergy_Q,
+      sportsenergy_U == 3 ~ sportsenergy_Q / 4.345,
+      sportsenergy_U %in% c(7, 9, .) ~ NA,
+      sportsenergy_Q %in% c(777, 999, .) ~ NA),
+    fruit_Q = case_when(
+      fruit_U == 1 ~ fruit_Q * 7,
+      fruit_U == 2 ~ fruit_Q,
+      fruit_U == 3 ~ fruit_Q / 4.345,
+      fruit_U %in% c(7, 9, .) ~ NA,
+      fruit_Q %in% c(777, 999, .) ~ NA),
+    salad_Q = case_when(
+      salad_U == 1 ~ salad_Q * 7,
+      salad_U == 2 ~ salad_Q,
+      salad_U == 3 ~ salad_Q / 4.345,
+      salad_U %in% c(7, 9, .) ~ NA,
+      salad_Q %in% c(777, 999, .) ~ NA),
+    friedpotato_Q = case_when(
+      friedpotato_U == 1 ~ friedpotato_Q * 7,
+      friedpotato_U == 2 ~ friedpotato_Q,
+      friedpotato_U == 3 ~ friedpotato_Q / 4.345,
+      friedpotato_U %in% c(7, 9, .) ~ NA,
+      friedpotato_Q %in% c(777, 999, .) ~ NA),
+    nonfriedpotato_Q = case_when(
+      nonfriedpotato_U == 1 ~ nonfriedpotato_Q * 7,
+      nonfriedpotato_U == 2 ~ nonfriedpotato_Q,
+      nonfriedpotato_U == 3 ~ nonfriedpotato_Q / 4.345,
+      nonfriedpotato_U %in% c(7, 9, .) ~ NA,
+      nonfriedpotato_Q %in% c(777, 999, .) ~ NA),
+    beans_Q = case_when(
+      beans_U == 1 ~ beans_Q * 7,
+      beans_U == 2 ~ beans_Q,
+      beans_U == 3 ~ beans_Q / 4.345,
+      beans_U %in% c(7, 9, .) ~ NA,
+      beans_Q %in% c(777, 999, .) ~ NA),
+    vegetables_Q = case_when(
+      vegetables_U == 1 ~ vegetables_Q * 7,
+      vegetables_U == 2 ~ vegetables_Q,
+      vegetables_U == 3 ~ vegetables_Q / 4.345,
+      vegetables_U %in% c(7, 9, .) ~ NA,
+      vegetables_Q %in% c(777, 999, .) ~ NA),
+    pizza_Q = case_when(
+      pizza_U == 1 ~ pizza_Q * 7,
+      pizza_U == 2 ~ pizza_Q,
+      pizza_U == 3 ~ pizza_Q / 4.345,
+      pizza_U %in% c(7, 9, .) ~ NA,
+      pizza_Q %in% c(777, 999, .) ~ NA),
+    redmeat_Q = case_when(
+      redmeat_U == 1 ~ redmeat_Q * 7,
+      redmeat_U == 2 ~ redmeat_Q,
+      redmeat_U == 3 ~ redmeat_Q / 4.345,
+      redmeat_U %in% c(7, 9, .) ~ NA,
+      redmeat_Q %in% c(777, 999, .) ~ NA),
+    processedmeat_Q = case_when(
+      processedmeat_U == 1 ~ processedmeat_Q * 7,
+      processedmeat_U == 2 ~ processedmeat_Q,
+      processedmeat_U == 3 ~ processedmeat_Q / 4.345,
+      processedmeat_U %in% c(7, 9, .) ~ NA,
+      processedmeat_Q %in% c(777, 999, .) ~ NA),
+    cheese_Q = case_when(
+      cheese_U == 1 ~ cheese_Q * 7,
+      cheese_U == 2 ~ cheese_Q,
+      cheese_U == 3 ~ cheese_Q / 4.345,
+      cheese_U %in% c(7, 9, .) ~ NA,
+      cheese_Q %in% c(777, 999, .) ~ NA),
+    bread_Q = case_when(
+      bread_U == 1 ~ bread_Q * 7,
+      bread_U == 2 ~ bread_Q,
+      bread_U == 3 ~ bread_Q / 4.345,
+      bread_U %in% c(7, 9, .) ~ NA,
+      bread_Q %in% c(777, 999, .) ~ NA),
+    grains_Q = case_when(
+      grains_U == 1 ~ grains_Q * 7,
+      grains_U == 2 ~ grains_Q,
+      grains_U == 3 ~ grains_Q / 4.345,
+      grains_U %in% c(7, 9, .) ~ NA,
+      grains_Q %in% c(777, 999, .) ~ NA),
+    choccandy_Q = case_when(
+      choccandy_U == 1 ~ choccandy_Q * 7,
+      choccandy_U == 2 ~ choccandy_Q,
+      choccandy_U == 3 ~ choccandy_Q / 4.345,
+      choccandy_U %in% c(7, 9, .) ~ NA,
+      choccandy_Q %in% c(777, 999, .) ~ NA),
+    pastries_Q = case_when(
+      pastries_U == 1 ~ pastries_Q * 7,
+      pastries_U == 2 ~ pastries_Q,
+      pastries_U == 3 ~ pastries_Q / 4.345,
+      pastries_U %in% c(7, 9, .) ~ NA,
+      pastries_Q %in% c(777, 999, .) ~ NA),
+    cookiescake_Q = case_when(
+      cookiescake_U == 1 ~ cookiescake_Q * 7,
+      cookiescake_U == 2 ~ cookiescake_Q,
+      cookiescake_U == 3 ~ cookiescake_Q / 4.345,
+      cookiescake_U %in% c(7, 9, .) ~ NA,
+      cookiescake_Q %in% c(777, 999, .) ~ NA),
+    icecream_Q = case_when(
+      icecream_U == 1 ~ icecream_Q * 7,
+      icecream_U == 2 ~ icecream_Q,
+      icecream_U == 3 ~ icecream_Q / 4.345,
+      icecream_U %in% c(7, 9, .) ~ NA,
+      icecream_Q %in% c(777, 999, .) ~ NA))
+```
+
+```{r}
+# calculating total servings/week for each category
+food_categories <- food_recoded %>%
+  mutate(
+    vegetables_total = rowSums(
+      select(., vegetables_Q, salad_Q), na.rm = TRUE),
+    fruit_total = rowSums(
+      select(., fruitjuice_Q, fruit_Q), na.rm = TRUE),
+    dairy_total = rowSums(
+      select(., milk_Q, cheese_Q), na.rm = TRUE),
+    meat_total = redmeat_Q,
+    beans_total = beans_Q,
+    sweetprocessed_total = rowSums(
+      select(., soda_Q, coffeetea_Q, sportsenergy_Q, friedpotato_Q,
+             choccandy_Q, pastries_Q, cookiescake_Q, icecream_Q, pizza_Q,
+             processedmeat_Q), na.rm = TRUE),
+    grains_total = rowSums(
+      select(., nonfriedpotato_Q, bread_Q, grains_Q), na.rm = TRUE))
+```
+
+```{r}
+food_final <- food_categories %>%
+  mutate(
+    vegetables_score = vegetables_total / 28 * 3,
+    fruit_score = fruit_total / 21 * 3,
+    dairy_score = case_when(
+      dairy_total <= 6 ~ 0.5,
+      dairy_total > 6 ~ 0),
+    meat_score = case_when(
+      meat_total <= 2 ~ 1,
+      meat_total > 2 ~ 0),
+    beans_score = case_when(
+      beans_total >= 3 ~ 1.5,
+      beans_total < 3 ~ 0),
+    sweetprocessed_score = case_when(
+      sweetprocessed_total <= 3 ~ 1,
+      sweetprocessed_total > 3 ~ 0),
+    grains_score = grains_total / 49
+  )
+
+# creating final diet score variable, adding up the scores from individual food categories
+food_final <- food_final %>%
+  mutate(total_score = vegetables_score + fruit_score + dairy_score + meat_score + beans_score + sweetprocessed_score + grains_score)
+
+food_final$total_score[food_final$total_score > 11] <- NA
+```
+
+## Descriptive Analyses
+
+```{r}
+par(mfrow = c(1, 2))
+# total participants in analysis (i.e. no missing values for total score): 5,380 
+hist(food_final$total_score[food_final$Outcome == 0],
+     main = "Outcome = 0",
+     xlab = "Mediterranean Diet Score") # no cancer, 4,628
+hist(food_final$total_score[food_final$Outcome == 1],
+     main = "Outcome = 1",
+     xlab = "Mediterranean Diet Score") # cancer, 752
+```
+
+Since the two samples are not normally distributed (both slightly right skewed), the assumptions for the two-sample t-test do not hold, and we cannot use this method to compare the mean diet score between the two groups (Outcome = 0 and Outcome = 1). Instead, we can conduct the Mann-Whitney U test, the nonparametric alternative to the two-sample t-test.
+
+```{r}
+wilcox.test(x = food_final$total_score[food_final$Outcome == 0],
+            y = food_final$total_score[food_final$Outcome == 1])
+```
+
+Since the p-value is equal to 0.3059, there is no statistically significant difference in Mediterranean diet score between those with colorectal cancer and those without.

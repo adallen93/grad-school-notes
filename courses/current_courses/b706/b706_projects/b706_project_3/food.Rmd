@@ -1,0 +1,24 @@
+---
+title: "Project 3 - Mediterranean Diet"
+author: "Austin Allen"
+output:
+  html_document:
+    theme: readable
+    code_folding: hide
+---
+
+
+```{r}
+library(tidyverse)
+library(haven)
+library(knitr)
+opts_chunk$set(warning = FALSE, message = FALSE)
+```
+
+
+```{r}
+food_dat <- read_sas("data/ffq_demo_final.sas7bdat")
+View(food_dat)
+
+```
+

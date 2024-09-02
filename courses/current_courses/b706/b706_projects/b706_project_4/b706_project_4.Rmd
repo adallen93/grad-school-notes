@@ -1,0 +1,516 @@
+---
+title: "BIOSTAT 706 - Project 4"
+output:
+  html_document:
+    theme: readable
+---
+
+```{r include = FALSE}
+##### IMPORTANT: #####
+# If you don't have any of these packages installed, you'll want to un-comment the code and install them
+
+# install.packages("tidyverse")
+# install.packages("here")
+# install.packages("kableExtra")
+# I'm pretty sure 'knitr' comes pre-loaded, but if you get errors, you should install `knitr` too
+
+# Load libraries (make sure they're installed first)
+library(tidyverse)
+library(knitr)
+library(here)
+library(kableExtra)
+
+# Set the global chunks for uniformity
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, fig.align = 'center', fig.width = 4, fig.height = 3)
+
+# Set file paths for easy read-in
+MIDUS_combined_reduced_file <- here::here("MIDUS_combined_reduced.csv")
+new_variable_names_file <- here::here("new_variable_names.csv")
+vars_to_keep_file <- here::here("vars_to_keep.csv")
+age_score_data_file <- here::here("age_score_data.csv")
+
+```
+
+
+*Note:* Before knitting this file, make sure `MIDUS_combined_reduced.csv`, `new_variable_names.csv`, `vars_to_keep.csv` and `age_score_data.csv` are downloaded in the same folder as this file. 
+
+
+
+## {.tabset .tabset-fade .tabset-pills}
+
+### Assign Variables to Group
+
+Everything in this section was used to create the .csv file called `new_variable_names.csv`. This code is not very important. 
+
+```{r}
+# Read in data and assign variable names to group for replacement (finished)
+# dat <- read.csv("MIDUS_combined_reduced.csv")[569:1315,]
+# column_names <- colnames(dat)
+# 
+# 
+
+# kiki <- data.frame(current_variable_name = column_names[1:51], new_variable_name = rep(NA, 51))
+# dorene <- data.frame(current_variable_name = column_names[52:102], new_variable_name = rep(NA, 51))
+# qianyu <- data.frame(current_variable_name = column_names[103:153], new_variable_name = rep(NA, 51))
+# tianyi <- data.frame(current_variable_name = column_names[154:204], new_variable_name = rep(NA, 51))
+# austin <- data.frame(current_variable_name = column_names[205:254], new_variable_name = rep(NA, 50))
+# 
+# write.csv(austin, "austin.csv")
+# write.csv(qianyu, "qianyu.csv")
+# write.csv(tianyi, "tianyi.csv")
+# write.csv(dorene, "dorene.csv")
+# write.csv(kiki, "kiki.csv")
+
+```
+
+```{r}
+# This code chunk is to perform basic wrangling on my own .csv file (finished)
+
+# austin <- read.csv("austin.csv")
+# 
+# austin %>% 
+#   mutate(description = new_variable_name,
+#          new_variable_name = str_replace_all(str_to_lower(new_variable_name), " ", "_")) %>% 
+#   write.csv("austin.csv")
+```
+
+
+
+```{r}
+# Read in all returned variable replacement assignments (finished)
+# kiki <- read.csv("variable_assignments/kiki.csv")[-1]
+# dorene <- read.csv("variable_assignments/dorene.csv")[-1]
+# qianyu <- read.csv("variable_assignments/qianyu.csv")[-1] %>% 
+#   mutate(new_variable_name = ifelse(new_variable_name == "", current_variable_name, new_variable_name)) %>% 
+#   rename(description = NOTEs)
+# tianyi <- read.csv("variable_assignments/tianyi.csv")[-1]
+# austin <- read.csv("variable_assignments/austin.csv")[-c(1,2)]
+
+# Perform basic cleaning to get all names uniform (finished)
+# new_variable_names <- rbind(kiki, dorene, qianyu, tianyi, austin) %>%
+#    filter(new_variable_name != "") %>%
+#    mutate(new_variable_name = str_to_lower(new_variable_name)) %>%
+#    select(-description) %>% 
+#   mutate(new_variable_name = str_replace_all(new_variable_name, " ", "_"))
+
+# Save a copy
+# write.csv(new_variable_names, "new_variable_names.csv")
+```
+
+### Assign new variable names to data
+
+```{r}
+# Load in data
+dat <- read.csv(MIDUS_combined_reduced_file) 
+
+dat <- dat %>% 
+  filter(!is.na(MIDUS2), # Deselect individuals not in MIDUS2
+         !is.na(MIDUS3)) # Deselect individuals not in MIDUS3 
+
+# Load in new variable names (idetify those in M2 and M3)
+new_variable_names <- read.csv(new_variable_names_file)[-1] 
+
+new_variable_names <- new_variable_names %>% 
+  mutate(new_variable_name = case_when(str_detect(new_variable_names$current_variable, '^B') ~ paste0("M3_", new_variable_name),
+                                       str_detect(new_variable_names$current_variable, '^C') ~ paste0("M2_", new_variable_name),
+                                       TRUE ~ new_variable_name))
+                                       
+# Rename variables
+renamed_dat <- dat %>% 
+  rename_with(~ new_variable_names$new_variable_name[match(., new_variable_names$current_variable_name)], everything())
+
+# Store names in a character vector
+new_names_vector <- colnames <- colnames(renamed_dat)
+
+# how many are in M2 and M3?
+m2_count <- sum(str_detect(new_names_vector, "M2"))
+m3_count <- sum(str_detect(new_names_vector, "M3"))
+
+# What columns are neither M2 nor M3? 
+other_colnames <- new_names_vector[which(!str_detect(new_names_vector, "M[2,3]"))]
+
+
+```
+
+
+### Calculate Score
+
+
+```{r}
+# Load in the data
+dat <- read.csv(MIDUS_combined_reduced_file) 
+
+dat <-dat %>% 
+  filter(!is.na(MIDUS2), # Deselect individuals not in MIDUS2
+         !is.na(MIDUS3)) # Deselect individuals not in MIDUS3
+
+# Load in the variables to keep
+vars_to_keep <- read.csv(vars_to_keep_file)[,1]
+
+# Select columns of interest
+dat_selected <- dat[vars_to_keep]
+
+# Values that are considered "missing"
+missing_code <- c(7,8,9)
+
+# Other conditions to be included (number shown in codebook for C4H1ZC)
+included_other_conditions = c(2,3,4,5,6,7,9,10,13,14,15,16,17,18,19,20,21,22,24)
+
+
+```
+
+
+This next code chunk is the actual code that calculates the score. Note that this code is used to produce the file `age_score_data.csv`, which you should already have downloaded. 
+
+
+
+```{r}
+# Create the dataframe of interest
+score_data <- dat %>% 
+  mutate(heart_disease_3 = case_when(C4H1A == 1 ~ 1,
+                                     C4H1A == 2 ~ .75,
+                                     C4H1A == 3 ~ 0,
+                                     C4H1A == 4 ~ .5,
+                                     C4H1A == 5 ~ .25,
+                                     TRUE ~ NA),
+         high_blood_pressure_3 = case_when(C4H1B == 1 ~ 1,
+                                     C4H1B == 2 ~ .75,
+                                     C4H1B == 3 ~ 0,
+                                     C4H1B == 4 ~ .5,
+                                     C4H1B == 5 ~ .25,
+                                     TRUE ~ NA),
+         circulation_problems_3 = case_when(C4H1C == 1 ~ 1,
+                                     C4H1C == 2 ~ .75,
+                                     C4H1C == 3 ~ 0,
+                                     C4H1C == 4 ~ .5,
+                                     C4H1C == 5 ~ .25,
+                                     TRUE ~ NA),         
+         blood_clots_3 = case_when(C4H1D == 1 ~ 1,
+                                     C4H1D == 2 ~ .75,
+                                     C4H1D == 3 ~ 0,
+                                     C4H1D == 4 ~ .5,
+                                     C4H1D == 5 ~ .25,
+                                     TRUE ~ NA),         
+         heart_murmur_3 = case_when(C4H1E == 1 ~ 1,
+                                     C4H1E == 2 ~ .75,
+                                     C4H1E == 3 ~ 0,
+                                     C4H1E == 4 ~ .5,
+                                     C4H1E == 5 ~ .25,
+                                     TRUE ~ NA),          
+         stroke_3 = case_when(C4H1F == 1 ~ 1,
+                                     C4H1F == 2 ~ .75,
+                                     C4H1F == 3 ~ 0,
+                                     C4H1F == 4 ~ .5,
+                                     C4H1F == 5 ~ .25,
+                                     TRUE ~ NA),          
+         anemia_3 = case_when(C4H1G == 1 ~ 1,
+                                     C4H1G == 2 ~ .75,
+                                     C4H1G == 3 ~ 0,
+                                     C4H1G == 4 ~ .5,
+                                     C4H1G == 5 ~ .25,
+                                     TRUE ~ NA),
+         cholesterol_problems_3 = case_when(C4H1H == 1 ~ 1,
+                                     C4H1H == 2 ~ .75,
+                                     C4H1H == 3 ~ 0,
+                                     C4H1H == 4 ~ .5,
+                                     C4H1H == 5 ~ .25,
+                                     TRUE ~ NA),          
+         diabetes_3 = case_when(C4H1I == 1 ~ 1,
+                                     C4H1I == 2 ~ .75,
+                                     C4H1I == 3 ~ 0,
+                                     C4H1I == 4 ~ .5,
+                                     C4H1I == 5 ~ .25,
+                                     TRUE ~ NA), 
+         anemia_3 = case_when(C4H1J == 1 ~ 1,
+                                     C4H1J == 2 ~ .75,
+                                     C4H1J == 3 ~ 0,
+                                     C4H1J == 4 ~ .5,
+                                     C4H1J == 5 ~ .25,
+                                     TRUE ~ NA),  
+         copd_3 = case_when(C4H1K == 1 ~ 1,
+                                     C4H1K == 2 ~ .75,
+                                     C4H1K == 3 ~ 0,
+                                     C4H1K == 4 ~ .5,
+                                     C4H1K == 5 ~ .25,
+                                     TRUE ~ NA), 
+         tuberculosis_3 = case_when(C4H1L == 1 ~ 1,
+                                     C4H1L == 2 ~ .75,
+                                     C4H1L == 3 ~ 0,
+                                     C4H1L == 4 ~ .5,
+                                     C4H1L == 5 ~ .25,
+                                     TRUE ~ NA), 
+         thyroid_disease_3 = case_when(C4H1N == 1 ~ 1,
+                                     C4H1N == 2 ~ .75,
+                                     C4H1N == 3 ~ 0,
+                                     C4H1N == 4 ~ .5,
+                                     C4H1N == 5 ~ .25,
+                                     TRUE ~ NA),
+         peptic_ulcer_3 = case_when(C4H1O == 1 ~ 1,
+                                     C4H1O == 2 ~ .75,
+                                     C4H1O == 3 ~ 0,
+                                     C4H1O == 4 ~ .5,
+                                     C4H1O == 5 ~ .25,
+                                     TRUE ~ NA),
+         cancer_3 = case_when(C4H1P == 1 ~ 1,
+                                     C4H1P == 2 ~ .75,
+                                     C4H1P == 3 ~ 0,
+                                     C4H1P == 4 ~ .5,
+                                     C4H1P == 5 ~ .25,
+                                     TRUE ~ NA),
+         colon_polyp_3 = case_when(C4H1Q == 1 ~ 1,
+                                     C4H1Q == 2 ~ .75,
+                                     C4H1Q == 3 ~ 0,
+                                     C4H1Q == 4 ~ .5,
+                                     C4H1Q == 5 ~ .25,
+                                     TRUE ~ NA),
+         arthritis_3 = case_when(C4H1R == 1 ~ 1,
+                                     C4H1R == 2 ~ .75,
+                                     C4H1R == 3 ~ 0,
+                                     C4H1R == 4 ~ .5,
+                                     C4H1R == 5 ~ .25,
+                                     TRUE ~ NA),
+         glaucoma_3 = case_when(C4H1S == 1 ~ 1,
+                                     C4H1S == 2 ~ .75,
+                                     C4H1S == 3 ~ 0,
+                                     C4H1S == 4 ~ .5,
+                                     C4H1S == 5 ~ .25,
+                                     TRUE ~ NA),
+         cirrhosis_3 = case_when(C4H1T == 1 ~ 1,
+                                     C4H1T == 2 ~ .75,
+                                     C4H1T == 3 ~ 0,
+                                     C4H1T == 4 ~ .5,
+                                     C4H1T == 5 ~ .25,
+                                     TRUE ~ NA),
+         depression_3 = case_when(C4H1V == 1 ~ 1,
+                                     C4H1V == 2 ~ .75,
+                                     C4H1V == 3 ~ 0,
+                                     C4H1V == 4 ~ .5,
+                                     C4H1V == 5 ~ .25,
+                                     TRUE ~ NA),
+ heart_disease_2 = case_when(B4H1A == 1 & B4H1AD == 1 ~ 1, 
+                             B4H1A == 1 & B4H1AD == 2 ~ .75,
+                             B4H1A == 1 & B4H1AD %in% missing_code ~ .75,
+                             B4H1A == 3 & B4H1AD == 1 ~ .5, 
+                             B4H1A == 3 & B4H1AD == 2 ~ .25,
+                             B4H1A == 3 & B4H1AD %in% missing_code ~ .25,
+                             B4H1A == 2 ~ 0,
+                             TRUE ~ NA
+                             
+                                     ),
+         high_blood_pressure_2 = case_when(B4H1B == 1 & B4H1BD == 1 ~ 1, 
+                             B4H1B == 1 & B4H1BD == 2 ~ .75,
+                             B4H1B == 1 & B4H1BD %in% missing_code ~ .75,
+                             B4H1B == 3 & B4H1BD == 1 ~ .5, 
+                             B4H1B == 3 & B4H1BD == 2 ~ .25,
+                             B4H1B == 3 & B4H1BD %in% missing_code ~ .25,
+                             B4H1B == 2 ~ 0,
+                             TRUE ~ NA),
+         circulation_problems_2 = case_when(B4H1C == 1 & B4H1CD == 1 ~ 1, 
+                             B4H1C == 1 & B4H1CD == 2 ~ .75,
+                             B4H1C == 1 & B4H1CD %in% missing_code ~ .75,
+                             B4H1C == 3 & B4H1CD == 1 ~ .5, 
+                             B4H1C == 3 & B4H1CD == 2 ~ .25,
+                             B4H1C == 3 & B4H1CD %in% missing_code ~ .25,
+                             B4H1C == 2 ~ 0,
+                             TRUE ~ NA),         
+         blood_clots_2 = case_when(B4H1D == 1 & B4H1DD == 1 ~ 1, 
+                             B4H1D == 1 & B4H1DD == 2 ~ .75,
+                             B4H1D == 1 & B4H1DD %in% missing_code ~ .75,
+                             B4H1D == 3 & B4H1DD == 1 ~ .5, 
+                             B4H1D == 3 & B4H1DD == 2 ~ .25,
+                             B4H1D == 3 & B4H1DD %in% missing_code ~ .25,
+                             B4H1D == 2 ~ 0,
+                             TRUE ~ NA),        
+         heart_murmur_2 = case_when(B4H1E == 1 & B4H1ED == 1 ~ 1, 
+                             B4H1E == 1 & B4H1ED == 2 ~ .75,
+                             B4H1E == 1 & B4H1ED %in% missing_code ~ .75,
+                             B4H1E == 3 & B4H1ED == 1 ~ .5, 
+                             B4H1E == 3 & B4H1ED == 2 ~ .25,
+                             B4H1E == 3 & B4H1ED %in% missing_code ~ .25,
+                             B4H1E == 2 ~ 0,
+                             TRUE ~ NA),         
+         stroke_2 = case_when(B4H1F == 1 & B4H1FD == 1 ~ 1, 
+                             B4H1F == 1 & B4H1FD == 2 ~ .75,
+                             B4H1F == 1 & B4H1FD %in% missing_code ~ .75,
+                             B4H1F == 3 & B4H1FD == 1 ~ .5, 
+                             B4H1F == 3 & B4H1FD == 2 ~ .25,
+                             B4H1F == 3 & B4H1FD %in% missing_code ~ .25,
+                             B4H1F == 2 ~ 0,
+                             TRUE ~ NA),         
+         anemia_2 = case_when(B4H1G == 1 & B4H1GD == 1 ~ 1, 
+                             B4H1G == 1 & B4H1GD == 2 ~ .75,
+                             B4H1G == 1 & B4H1GD %in% missing_code ~ .75,
+                             B4H1G == 3 & B4H1GD == 1 ~ .5, 
+                             B4H1G == 3 & B4H1GD == 2 ~ .25,
+                             B4H1G == 3 & B4H1GD %in% missing_code ~ .25,
+                             B4H1G == 2 ~ 0,
+                             TRUE ~ NA),
+         cholesterol_problems_2 = case_when(B4H1H == 1 & B4H1HD == 1 ~ 1, 
+                             B4H1H == 1 & B4H1HD == 2 ~ .75,
+                             B4H1H == 1 & B4H1HD %in% missing_code ~ .75,
+                             B4H1H == 3 & B4H1HD == 1 ~ .5, 
+                             B4H1H == 3 & B4H1HD == 2 ~ .25,
+                             B4H1H == 3 & B4H1HD %in% missing_code ~ .25,
+                             B4H1H == 2 ~ 0,
+                             TRUE ~ NA),          
+         diabetes_2 = case_when(B4H1I == 1 & B4H1ID == 1 ~ 1, 
+                             B4H1I == 1 & B4H1ID == 2 ~ .75,
+                             B4H1I == 1 & B4H1ID %in% missing_code ~ .75,
+                             B4H1I == 3 & B4H1ID == 1 ~ .5, 
+                             B4H1I == 3 & B4H1ID == 2 ~ .25,
+                             B4H1I == 3 & B4H1ID %in% missing_code ~ .25,
+                             B4H1I == 2 ~ 0,
+                             TRUE ~ NA),
+         anemia_2 = case_when(B4H1J == 1 & B4H1JD == 1 ~ 1, 
+                             B4H1J == 1 & B4H1JD == 2 ~ .75,
+                             B4H1J == 1 & B4H1JD %in% missing_code ~ .75,
+                             B4H1J == 3 & B4H1JD == 1 ~ .5, 
+                             B4H1J == 3 & B4H1JD == 2 ~ .25,
+                             B4H1J == 3 & B4H1JD %in% missing_code ~ .25,
+                             B4H1J == 2 ~ 0,
+                             TRUE ~ NA),  
+         copd_2 = case_when(B4H1K == 1 & B4H1KD == 1 ~ 1, 
+                             B4H1K == 1 & B4H1KD == 2 ~ .75,
+                             B4H1K == 1 & B4H1KD %in% missing_code ~ .75,
+                             B4H1K == 3 & B4H1KD == 1 ~ .5, 
+                             B4H1K == 3 & B4H1KD == 2 ~ .25,
+                             B4H1K == 3 & B4H1KD %in% missing_code ~ .25,
+                             B4H1K == 2 ~ 0,
+                             TRUE ~ NA),
+         tuberculosis_2 = case_when(B4H1L == 1 & B4H1LD == 1 ~ 1, 
+                             B4H1L == 1 & B4H1LD == 2 ~ .75,
+                             B4H1L == 1 & B4H1LD %in% missing_code ~ .75,
+                             B4H1L == 3 & B4H1LD == 1 ~ .5, 
+                             B4H1L == 3 & B4H1LD == 2 ~ .25,
+                             B4H1L == 3 & B4H1LD %in% missing_code ~ .25,
+                             B4H1L == 2 ~ 0,
+                             TRUE ~ NA),
+         thyroid_disease_2 = case_when(B4H1N == 1 & B4H1ND == 1 ~ 1, 
+                             B4H1N == 1 & B4H1ND == 2 ~ .75,
+                             B4H1N == 1 & B4H1ND %in% missing_code ~ .75,
+                             B4H1N == 3 & B4H1ND == 1 ~ .5, 
+                             B4H1N == 3 & B4H1ND == 2 ~ .25,
+                             B4H1N == 3 & B4H1ND %in% missing_code ~ .25,
+                             B4H1N == 2 ~ 0,
+                             TRUE ~ NA),
+         peptic_ulcer_2 = case_when(B4H1O == 1 & B4H1OD == 1 ~ 1, 
+                             B4H1O == 1 & B4H1OD == 2 ~ .75,
+                             B4H1O == 1 & B4H1OD %in% missing_code ~ .75,
+                             B4H1O == 3 & B4H1OD == 1 ~ .5, 
+                             B4H1O == 3 & B4H1OD == 2 ~ .25,
+                             B4H1O == 3 & B4H1OD %in% missing_code ~ .25,
+                             B4H1O == 2 ~ 0,
+                             TRUE ~ NA),
+         cancer_2 = case_when(B4H1P == 1 & B4H1PD == 1 ~ 1, 
+                             B4H1P == 1 & B4H1PD == 2 ~ .75,
+                             B4H1P == 1 & B4H1PD %in% missing_code ~ .75,
+                             B4H1P == 3 & B4H1PD == 1 ~ .5, 
+                             B4H1P == 3 & B4H1PD == 2 ~ .25,
+                             B4H1P == 3 & B4H1PD %in% missing_code ~ .25,
+                             B4H1P == 2 ~ 0,
+                             TRUE ~ NA),
+         colon_polyp_2 = case_when(B4H1Q == 1 & B4H1QD == 1 ~ 1, 
+                             B4H1Q == 1 & B4H1QD == 2 ~ .75,
+                             B4H1Q == 1 & B4H1QD %in% missing_code ~ .75,
+                             B4H1Q == 3 & B4H1QD == 1 ~ .5, 
+                             B4H1Q == 3 & B4H1QD == 2 ~ .25,
+                             B4H1Q == 3 & B4H1QD %in% missing_code ~ .25,
+                             B4H1Q == 2 ~ 0,
+                             TRUE ~ NA),
+         arthritis_2 = case_when(B4H1R == 1 & B4H1RD == 1 ~ 1, 
+                             B4H1R == 1 & B4H1RD == 2 ~ .75,
+                             B4H1R == 1 & B4H1RD %in% missing_code ~ .75,
+                             B4H1R == 3 & B4H1RD == 1 ~ .5, 
+                             B4H1R == 3 & B4H1RD == 2 ~ .25,
+                             B4H1R == 3 & B4H1RD %in% missing_code ~ .25,
+                             B4H1R == 2 ~ 0,
+                             TRUE ~ NA), 
+          glaucoma_2 = case_when(B4H1S == 1 & B4H1SD == 1 ~ 1, 
+                             B4H1S == 1 & B4H1SD == 2 ~ .75,
+                             B4H1S == 1 & B4H1SD %in% missing_code ~ .75,
+                             B4H1S == 3 & B4H1SD == 1 ~ .5, 
+                             B4H1S == 3 & B4H1SD == 2 ~ .25,
+                             B4H1S == 3 & B4H1SD %in% missing_code ~ .25,
+                             B4H1S == 2 ~ 0,
+                             TRUE ~ NA),
+         cirrhosis_2 = case_when(B4H1T == 1 & B4H1TD == 1 ~ 1, 
+                             B4H1T == 1 & B4H1TD == 2 ~ .75,
+                             B4H1T == 1 & B4H1TD %in% missing_code ~ .75,
+                             B4H1T == 3 & B4H1TD == 1 ~ .5, 
+                             B4H1T == 3 & B4H1TD == 2 ~ .25,
+                             B4H1T == 3 & B4H1TD %in% missing_code ~ .25,
+                             B4H1T == 2 ~ 0,
+                             TRUE ~ NA),
+         depression_2 = case_when(B4H1V == 1 & B4H1VD == 1 ~ 1, 
+                             B4H1V == 1 & B4H1VD == 2 ~ .75,
+                             B4H1V == 1 & B4H1VD %in% missing_code ~ .75,
+                             B4H1V == 3 & B4H1VD == 1 ~ .5, 
+                             B4H1V == 3 & B4H1VD == 2 ~ .25,
+                             B4H1V == 3 & B4H1VD %in% missing_code ~ .25,
+                             B4H1V == 2 ~ 0,
+                             TRUE ~ NA),
+ sex = B1PRSEX,
+ age_M2 = B1PAGE_M2,
+ age_M3 = C1PRAGE)
+
+score_data <- score_data[255:295] %>% 
+  na.omit() %>% 
+  mutate(score_M2 = rowSums(select(., matches("_2$"))),
+         score_M3 = rowSums(select(., matches("_3$"))),
+         mean_age_score = (score_M2 + score_M3)/2,
+         mean_age = (age_M2 + age_M3)/2) 
+
+  
+```
+
+```{r}
+# You should already have this file downloaded
+# write.csv(score_data, "age_score_data.csv")
+```
+
+
+### Table 
+
+
+In the `Calculate Score` section, we wrote the file, `age_score_data.csv`. Let's print out a table of the data in this file. 
+
+```{r}
+# Load in score_data file
+score_data <- read.csv(age_score_data_file)
+
+knitr::kable(score_data, escape = FALSE) %>%
+  kableExtra::kable_styling(full_width = T, scroll = TRUE) %>%
+  mutate(
+    # Set max-height for the table container (optional)
+    attr("style") = paste(attr("style"), "max-height: 300px;", sep = "")
+  )
+
+```
+
+
+### Plot
+
+I don't remember exactly why I created this plot with sex as a factor, but here it is. 
+
+```{r}
+ggplot(score_data, aes(x = mean_age, y = mean_age_score, color = as.factor(sex))) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE, lty = 2, lwd = .75) +
+  labs(x = "Mean Chronological Age", y = "Mean Aging Score", title = "How does the mean age score differ by sex?", col = "Sex") +
+  scale_color_manual(values = c("skyblue", "pink")) +
+  theme_minimal() + 
+  theme(text = element_text(family = "serif"),
+        plot.title = element_text(family = "serif", face = "bold", hjust = .5),
+        panel.grid = element_blank())
+
+
+```
+
+
+
+
+
+
+
+
+

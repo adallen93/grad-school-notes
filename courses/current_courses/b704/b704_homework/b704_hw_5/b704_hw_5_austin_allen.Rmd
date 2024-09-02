@@ -1,0 +1,96 @@
+---
+title: "BIOSTAT 704 - Homework 5"
+author: "Austin Allen"
+date: "March 8th, 2024"
+output:
+  pdf_document:
+    latex_engine: xelatex
+---
+
+## Problem 1
+
+BE 9.21: Consider a random sample of size $n$ from a Bernoulli distribution, $X_i \sim Bin(1,p)$. 
+
+**Part (a):** Find the CRLB for the variances of unbiased estimators of p.
+
+**Part (b):** Find the CRLB for the variances of unbiased estimators of p(1 - p).
+
+**Part (c):** Find a UMVUE of p.
+
+
+BE 9.23: Let $X_1, ... , X_n$ be a random sample from a normal distribution, $N(0, \theta)$. 
+
+**Part (a):** Is the MLE, $\hat{\theta}$, and unbiased estimator of $\theta$?
+
+**Part (b):** Is $\hat{\theta}$ a UMVUE of $\theta$?
+
+BE 9.26: Consider a random sample of size $n$ from a distribution with pdf $f(x; \theta) = 1/\theta$ if $0 < x \le \theta$, and zero otherse; $0 < \theta$. 
+
+**Part (a):** Find the MLE $\hat{\theta}$.
+
+
+**Part (b):** Find the MME $\tilde{\theta}$.
+
+
+**Part (c):** Is $\hat{\theta}$ unbiased? 
+
+
+**Part (d):** Is $\tilde{\theta}$ unbiased?
+
+
+**Part (e):** Compare the MSEs of $\hat{\theta}$ and $\tilde{\theta}$. 
+
+
+
+
+BE 9.31: Let $\hat{\theta}$ and $\tilde{\theta}$ be the MLE and MME, respectively, for $\theta$ in Exercise 26. 
+
+**Part (a):** Show that $\hat{\theta}$ is consistent.
+
+**Part (a):** Show that $\tilde{\theta}$ is consistent.
+
+BE 9.35: Find the asymptotic distribution of the MLE of p in Exercise 4(a). 
+
+
+## Problem 2
+
+
+Suppose that $X_1, . . . , X_n$ is a random sample from $GAM(\theta, 2)$.
+
+Part (a): Show that the MLE of $\theta$ is $\hat{\theta} = \sum_{i = 1}^{n} \frac{X_i}{2n}$
+
+
+Part (b): Is the MLE of $\theta$ simply consistent?
+
+
+## Problem 3
+
+Consider again the MME and MLE of $\theta$ in BE Exercise 9.26. Suppose you wanted to compare their performance for estimating $\theta$. 
+
+Part (a): Is it appropriate to compare their performance by computing their relative efficiency? If so, what is it and which estimator has better performance? If not, explain why not.
+
+
+Part (b): Is it appropriate to compare their performance by computing their asymptotic relative efficiency? If so, what is it and which estimator has better performance? If not, explain why not.
+
+Part (c): Could either of the metrics described in part (a) or (b) be used to compare the finite-sample performance of these estimators? If so, which one? If not, propose another metric that could be used.
+
+Part (d): Could either of the metrics described in part (a) or (b) be used to compare the large-sample performance of these estimators? If so, which one? If not, propose another metric that could be used.
+
+## Problem 4. 
+
+Consider again the scenario given in BE Exercise 9.21. It can be shown that $\bar{X}_n$ is the MLE of p.
+
+Part (a): What is the MLE of p(1 − p)?
+
+Part (b): Is the MLE found in part (a) a UMVUE for p(1 − p)? Explain your reasoning.
+
+Part (c): Does the result found in part (b) contradict the following result given on page 316 of the course text?
+
+$$
+\tau(\hat{\theta})_\text{MLE} \sim^d N(\tau(\theta), \text{CRLB}(\tau(\theta)))
+$$
+
+
+Explain your reasoning.
+
+Note: The result above extends the result given on page 316 from $\theta$ to $\tau(\theta)$. This extension can be established using Cramer’s Theorem.

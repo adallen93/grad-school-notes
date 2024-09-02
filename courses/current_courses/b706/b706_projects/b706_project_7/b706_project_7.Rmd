@@ -1,0 +1,11 @@
+---
+
+---
+
+```{r}
+dat <- read.csv("CLHLS_biomarkers.csv")
+
+vars <- colnames(dat)
+
+```
+

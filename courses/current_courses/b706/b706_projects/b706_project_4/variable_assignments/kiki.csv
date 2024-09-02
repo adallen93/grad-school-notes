@@ -1,0 +1,52 @@
+,current_variable_name,new_variable_name,description
+1,M2ID,MIDUS_Core _D , MIDUS Core ID - Public Use
+2,M2FAMNUM,MIDUS_Core_family_number,MIDUS Core family number
+3,C1PRAGE,age_at_MIDU3_P1,Respondent's calculated age at MIDUS 3 Project 1 phone interview
+4,C1PRSEX,Respondent_sex,Respondent's sex
+5,C4ZSITE,biomarker_collection_site,Biomarker data collection site
+6,C4ZCOMPM,Month_biomarker,Month Biomarker data was collecte
+7,C4ZCOMPY,Year_biomarker,Year Biomarker data was collected
+8,C4H1A,heart_disease_ever,Have you ever had heart disease?
+9,C4H1B,high_blood_pressure_ever,Have you ever had high blood pressure?
+10,C4H1C,circulation_problem_ever,Have you ever had circulation problems?
+11,C4H1D,blood_clots_ever,#NAME?
+12,C4H1E,haert_murmur_ever,#NAME?
+13,C4H1F,TIA_stroke_ever,Have you ever had a TIA (mini-stroke) or stroke?
+14,C4H1G,anemia_bloodisease_ever,Have you ever had anemia or other blood disease?
+15,C4H1H,cholesterol_ever,#NAME?
+16,C4H1I,Diabetes_ever,Have you ever had diabetes?
+17,C4H1IT,diabetes_current,Do you have Type 1 or Type 2 diabetes?
+18,C4H1IY,year_diagnosis_diabetes,#NAME?
+19,C4H1J,asthma_ever,Have you ever had asthma?
+20,C4H1K,COPD_ever,Have you ever had emphysema/COPD?
+21,C4H1L,tuberculosis_ever,Have you ever had tuberculosis?
+22,C4H1M,positive_TB_ever,Have you ever had a positive TB skin test?
+23,C4H1N,thyroid_ever,Have you ever had thyroid disease?
+24,C4H1O,peptic_ulcer_ever,Have you ever had peptic ulcer disease?
+25,C4H1P,cancer_ever,Have you ever had cancer?
+26,C4H1Q,Colon_polyp_ever,#NAME?
+27,C4H1R,arthritis_ever,Have you ever had arthritis
+28,C4H1S,glaucoma_ever,Have you ever had glaucoma?
+29,C4H1T,cirrhosis_liverdisease_ever,Have you ever had cirrhosis/liver disease?
+30,C4H1U,alcoholism_ever,Have you ever had alcoholism
+31,C4H1V,depression_ever,Have you ever had depression?
+32,C4H1W,blood_transfusion_before_1993,Did you have a blood transfusion before 1993?
+33,C4H1X,ParathyroidDisease_elevatedbloodcalcium_ever,Have you ever had Parathyroid Disease or elevated blood calcium?
+34,C4H1Y,CushingSyndrome _elevatedcortisol_ever,Have you ever had Cushing Syndrome or elevated cortisol?
+35,C4H1OTH,other_condition_ever,Had any other condition?
+36,C4H1TOTH,number_other_conditions,Total number of other conditions
+37,C4H1ZSC,other_condition_1,- Specify other condition 1 - here are alot conditions
+38,C4H1ZD,physician_diagonosis_1,- Physician diagnosed other condition 1
+39,C4H1AASC,other_condition_2,Specify other condition 2 - Coded
+40,C4H1AAD,physician_diagonosis_2,- Physician diagnosed other condition 2
+41,C4H1ABSC,other_condition_3,- Specify other condition 3 - Coded
+42,C4H1ABD,physician_diagonosis_3, Physician diagnosed other condition
+43,C4H1ACSC,other_condition_4,- Specify other condition 4 - Coded
+44,C4H1ACD,physician_diagonosis_4,Physician diagnosed other condition 4
+45,C4H1ADSC,other_condition_5,Specify other condition 5 - Coded
+46,C4H1ADD,physician_diagonosis_5,- Physician diagnosed other condition 5
+47,C4ZBLOOD,Biomarker blood sample status,Biomarker blood sample status
+48,C4BHA1C,Blood Hemoglobin A1c,Blood Hemoglobin A1c %
+49,C4BCHOL,Blood Total Cholesterol ,Blood Total Cholesterol (mg/dL)
+50,C4BTRIGL,Blood Triglycerides ,Blood Triglycerides (mg/dL)
+51,C4BHDL,Blood HDL Cholesterol ,Blood HDL Cholesterol (mg/dL)

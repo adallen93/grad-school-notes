@@ -1,0 +1,151 @@
+---
+title: "Statistical Analysis Plan (SAP) Template"
+output: word_document
+---
+
+```{r setup, echo=FALSE, include=FALSE, warning=FALSE}
+# will be applied to the chunk.
+knitr::opts_chunk$set(echo=TRUE, warning=FALSE, fig.width=5, fig.height=5,
+    dpi=300)
+
+library(tidyverse)
+library(lubridate)
+library(knitr)
+
+options(knitr.kable.NA="")
+options(max.print = .Machine$integer.max)  # don't limit console printing
+
+rm(list=ls())
+```
+
+|Key Information| |
+|----------------------------|--------------------------------|
+|Title| |                                               
+|CRU/Department/Division/Center| |                              
+|IRB Number| |                                    
+|Investigators| |                                                    
+|Primary Investigator| |                                          
+|Collaborative Lead| |                                       
+|Co-authors (if known) | |                                            
+|Analysis Biostatistician(s)| |                                  
+|Biostatistics Supervisor| |                                 
+|Lead Biostatistician| |                                       
+|Subject Matter Expert| |                                           
+|Original Creation Date| |                                          
+|Version Date| |                                         
+|Project Folder Location| |                                         
+|Project Goal(s)|  |                                       
+|Submission Deadline(s)| |                                            
+|Effort Estimate (optional)| |
+---------------------------------------------------------------
+
+
+
+# 1 Study Overview
+
+
+### *1.1 Study Aims* 
+
+### *1.2 Study Hypotheses*
+
+### *1.2.1 Primary Hypotheses*
+
+### *1.2.2 Secondary Hypotheses*
+
+
+# 2 Study Population
+
+### *2.1 Inclusion Criteria*
+
+### *2.2 Exclusion Criteria*
+
+### *2.3 Data Acquisition*
+
+This is an example of the information that could be provided in this section:
+
+|------------------------------------------------------------------|
+Study design	
+Data source/how the data were collected	
+Contact information for team member responsible for data collection/acquisition	
+Date or version (if downloaded, provide date)	
+Data transfer method and date	
+Where dataset is stored	
+-------------------------------------------------------------------
+
+
+
+# 3 3	Outcomes, Exposures, and Additional Variables of Interest
+
+
+### *3.1 Primary Outcome(s)*
+
+You should only have 1-2 primary outcomes and the rest should be secondary. A table with the following headers could be helpful.
+
+* Outcome
+* Description
+* Variables and Source 
+* Specifications
+  - e.g., how is it coded?
+
+
+### *3.2 Secondary Outcome(s)*
+
+* Outcome
+* Description
+* Variables and Source 
+* Specifications
+  - e.g., how is it coded?
+
+### *3.3 Additional Variables of Interest*
+
+This is optional but generally this would be all your covariates of interest. If there are any variables that need special calculations etc. include them here or in a data dictionary that is an appendix to this SAP which you can reference here. 
+
+* Variable
+* Description
+* Variables and Source 
+* Specifications
+  - e.g., how is it coded?
+
+# 4	Statistical Analysis Plan
+
+### *4.1 Analysis Plans for Aim 1*
+
+### *4.2 Analysis Plans for Aim 2*
+
+
+# 5 Results
+
+### *5.1 Demographic and Clinical Characteristics ("Table 1")*
+
+### *5.2 Analysis Plans for Aim 1*
+
+### *5.3 Analysis Plans for Aim 2*
+
+
+# 6 Limitations
+
+All design and analysis limitations (this will grow as you do the study and should be included in the report)
+
+
+# 7 Addendum for Additional Analyses
+
+[insert if applicable]
+
+All post-hoc analyses should be described here. If minor changes are made to the main analysis (e.g. adding a covariate to the model), this can be changed in the main analysis section above and a note should be added to the activity log. 
+
+
+# 8	Appendix
+
+This section can be used to include table shells, example figures, or anything else that does not belong in the body of the SAP but you feel should be included.
+
+
+# 9	References
+
+If needed, this section can included citations to statistical methods, programming software (including R packages), and/or relevant clinical literature.
+
+
+
+
+
+
+

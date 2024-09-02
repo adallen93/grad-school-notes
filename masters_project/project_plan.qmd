@@ -1,0 +1,200 @@
+---
+title: "Masters Project Plan"
+date: last-modified
+author: "Austin Allen"
+format:
+  html:
+    self-contained: true
+    page-layout: full
+    title-block-banner: true
+    toc: true
+    toc-depth: 3
+    toc-location: body
+    number-sections: false
+    html-math-method: katex
+    code-fold: true
+    code-summary: "Show the code"
+    code-overflow: wrap
+    code-copy: hover
+    code-tools:
+        source: false
+        toggle: true
+        caption: See code
+execute: 
+  warning: false
+    
+---
+
+
+::: {.panel-tabset}
+
+### Timeline
+
+
+::: {.panel-tabset}
+
+#### Important Deadlines
+
+::: {.callout-tip collapse="true"}
+
+##### **MP - 1**: September 7, 2024
+
+MP - 1 is the approval form from my project advisor. It contains the names of my advisor, committee members, and the signature of my advisor and Jesse. They are certifying that I have submitted my **Specific Aims** document (1 - 2 pages) that contains the following:
+
+* Project title
+* Description of the background for the project
+* Clearly stated specific aims for the research (1 to 3 aims is sufficient) along with a brief description of how each aim will be addressed (study design, data sources, statistical methods, etc.)
+* Proposed timeline that lists completion dates for relevant project milestones (for example, completing data management to create final analytic dataset, drafting statistical analysis plan, completing all planned statistical analyses, drafting presentation slides and written report, and dates of committee meetings)
+* Learning objectives to be accomplished by completing the project
+* Suggested examining committee members (must contain at least 2 B&B faculty members including advisor) 
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+##### **MP - 2**: October 15, 2024
+
+MP - 2 is the approval for my advanced **Specific Aims** document (3 - 5 pages). It must be signed by my advisor and the DGS. It contains the following:
+
+* Project title
+* Brief description of changes to the project since the specific aims page was submitted
+* Learning objectives
+* Background – this section should be an expansion of the background from the specific aims page
+* Specific aims and methods to be applied – list each aim separately and the detailed statistical methods that will be applied to address each aim
+* Timeline – this section should show the finalized timeline that lists completion dates for relevant project milestones (for example, completing data management to create final analytic dataset, drafting statistical analysis plan, completing all planned statistical analyses, drafting presentation slides and written report, etc.)
+* Date of the planned Progress Report Meeting with Examining Committee (see MP-3 for more details)
+* Date of the final defense (see MP-4 for more details) 
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+##### **MP - 3**: January 31, 2025
+
+MP - 3 is the approval form for my advisor and committee members stating that my oral presentation was satisfactory. The oral presentation is a progress report of all work accomplished up to this point. It is a 20 - minute presentation and should include a slide set with the following:
+
+*  Project title
+* Detailed description of the background and goals of the project
+* Detailed summary of the progress made to date toward project goals and learning objectives
+* Detailed summary of any changes to the project scope and a justification of the changes, if applicable
+* Detailed summary of the remaining work to be completed and proposed timeline 
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+##### **MP - 4**: April 10, 2025
+
+MP - 4 is the approval form for my advisor to approve my final work product. The final work product will typically be some form of written document along with an oral examination. The final product should include the following:
+
+• Detailed description of the background and goals of the project
+• Detailed summary of the findings and conclusions of the project
+• Detailed discussion of the project’s significance 
+
+:::
+
+#### Timeline Goals
+
+**Spring 2024**
+
+* April 15th: Advisor and committee members selected and contacted
+
+**Summer 2024**
+
+* July 1st: Specific Aims part 1 submitted to advisor for approval (MP - 1)
+* August 1st: Specific Aims part 2 submitted to advisor for approval (MP - 2)
+
+**Fall 2024**
+
+* September 1st: Progress report scheduled (MP - 3)
+* October 1st: Progress report completed (MP - 3)
+
+**Spring 2025**
+
+* January 20th: Work product completed and submitted to committe for review before oral examination (MP - 4, part 1)
+* February 1st: Oral examination completed (MP - 4, part 2)
+
+:::
+
+
+
+### Committee
+
+::: {.panel-tabset}
+
+#### Possible Candidates
+
+**Advisor**
+
+* Donna Niedzwiecki
+* Hussein Al-Khalidi
+  - Greg told me he's going to be on vacation over the summer, so he would be hard to access
+* Tina Davenport
+  - I don't want to bog Tina down
+
+**Committee Members**
+
+* Samantha Thomas
+* Hussein Al-Khalidi
+* Jesse Troy
+* Donna Niedziecki
+* Josh Granek
+* Beth Hauser
+* Kouros Owzar
+* Roland Matsouaka
+* Patrick Wang
+* David Yanez
+
+#### Students Conversations
+
+**Tyler Jones**
+
+* Tyler is working with Donna Niedzwiecki. 
+* I haven't talked to Tyler about his experience working with Donna. 
+
+**Marilyn Sanchez**
+
+* Marilyn also is working with Donna Niedzwiecki as her advisor. 
+* Marilyn said that Donna is very hands-on and has schedule an hour and a half meeting every week this semester. 
+
+**Julia Benedetti**
+
+* Julia finished her master's project early
+
+**Cat Gervais**
+
+* Cat finished her master's project early
+* Cat worked with Hussein as her advisor. She said he is very hands-off, in a good way. Tina is on her committee. 
+
+#### Advisor Correspondence
+
+:::
+
+
+
+### Project Details
+
+::: {.panel-tabset}
+
+#### Resources
+
+::: {.panel-tabset}
+
+##### Articles
+
+##### Videos
+
+##### Coding
+
+:::
+
+#### Questions
+
+#### Next Steps
+
+#### Completed Steps
+
+:::
+
+
+:::

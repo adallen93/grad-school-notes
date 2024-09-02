@@ -1,0 +1,216 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={BIOSTAT 704 - Homework 2},
+  pdfauthor={Austin Allen},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{BIOSTAT 704 - Homework 2}
+\author{Austin Allen}
+\date{February 6, 2024}
+
+\begin{document}
+\maketitle
+
+\hypertarget{problem-1}{%
+\subsection{Problem 1}\label{problem-1}}
+
+Let \(Y_1,...,Y_n\) be a random sample where
+\(Y_i \sim \text{GAM}(\theta, \kappa)\).
+
+\begin{itemize}
+\tightlist
+\item
+  \(Y_i\) represents the amount of rainfall accumulated in a reservoir
+  over a year
+\item
+  \(\mu = E(YPi) = 132\)
+\item
+  \(\sigma^2 = Var(Y_i) = 26.4\) \(\implies \sigma = 5.14\)
+\item
+  \(Y_n = 1/n \sum_{i = 1}^{n} X_i\)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Note: I'm not sure if this was to be
+    \(Y_n = 1/n \sum_{i = 1}^{n} Y_i\)
+  \end{itemize}
+\end{itemize}
+
+\textbf{Part (a):} Give an approximation of \(P(\bar{Y} > 200)\) for
+\(n = 500\)
+
+\begin{quote}
+To calculate this probability, we're going to rely on the central limit
+theorem. We will let
+\(Z = \frac{\bar{Y}_n - \mu}{\sigma/\sqrt{n}} = \frac{\bar{Y}_n - 132}{5.14/\sqrt{500}}\).
+\end{quote}
+
+\begin{align*}
+P(\bar{Y}_n \ge 200) &= P(\frac{\bar{Y}_n - 132}{0.23} \ge \frac{200 - 132}{0.23})\\
+&= 1 - P(\frac{\bar{Y}_n - 132}{0.23} < \frac{200 - 132}{0.23})\\
+&= 1 - P(Z < 295.9)\\
+&= 0
+\end{align*}
+
+\textbf{Part (b):} What is the true distribution of \(\bar{Y}_n\)?
+
+\begin{quote}
+I decided to use the MGF method to deterimine this distribution:
+\end{quote}
+
+\begin{align*}
+M_{Y_i}(t) &= E(exp(Y_it))\\
+&= (\frac{1}{1 - \theta t})^{\kappa}\\
+M_{\bar{Y}_n}(t) &= E(exp(\bar{Y}_n t))\\
+&= E(exp((1/n)\sum Y_i t))\\
+&= E(exp((t/n)\sum Y_i))\\
+&= E(\prod exp((Y_i t)/n))\\
+&= \prod E(exp((Y_i t)/n)))\\
+&= \prod M_{Y_i}(t/n)\\
+&= (\frac{1}{1 - \theta t/n})^{n\kappa}
+\end{align*}
+
+\begin{quote}
+You can see that \(\bar{Y}_n\) follows a Gamma distribution with
+parameters \(GAM(\theta/n, n\kappa)\).
+\end{quote}
+
+\textbf{Part (c):} Does \(\bar{Y}_n\) converge in probability? If so,
+what is the limit?
+
+\begin{quote}
+Let's start with the definition of \emph{stochastic convergence}. That
+is, \(Y_N\) is said to converge in probability (stochastically) to a
+constant c if and only if for every \(\epsilon > 0\),
+\(\lim_{n \to \infty} P[|Y_n- c| < \epsilon] = 1\) (see chapter 7 notes,
+page 17).
+
+We can also remember the Chebychev inequality to help us determine
+stochastic convergence. Remember that probabilities are bounded by 0 and
+1, which when combined with the Chebychev inequality, gives rise to the
+following:
+\end{quote}
+
+\hypertarget{problem-2}{%
+\subsection{Problem 2}\label{problem-2}}
+
+Suppose that \(X_n\) follows a binomial distribution with parameters
+\((n, \pi)\) where \(\pi \in (0,1)\). Define \(Y_n = \frac{1}{n}X_n\)
+for each \(n\).
+
+In each case below, clearly indicate which theorems you have used to
+establish the result.
+
+\textbf{Hint:} First, write \textbf{Y\_n} as a sample mean of a random
+sample that you will specify.
+
+\begin{quote}
+We can specify \(Y_n\) as a sample mean by considering that
+\(X_n = \sum_{i = 1}^{n} W_i, W_i \sim Binom(1, \pi)\). This will help
+us in the following parts.
+\end{quote}
+
+\textbf{Part (a):} Find the asymptotic normal distribution of \(Y_n\).
+
+\begin{quote}
+By the central limit theorem and definition 7.5.1, if it can be shown
+that \(\frac{Y_n - m}{c/\sqrt{n}} \sim N(0,1)\) as
+\(n \rightarrow \infty\), then the asymptotic normal distribution of
+\(Y_n\) is \(Y_n \sim^d N(m, c^2/n)\).
+
+Because we're dealing with the sample mean of \(n\) \(i.i.d.\) random
+variables of \(W_i\), where \(W_i \sim Binom(1,\pi)\), we know that the
+asymptotic normal distribution of \(Y_n\) is \$N(\pi,
+\frac{\pi(1 - \pi)}{n}).
+\end{quote}
+
+\textbf{Part (b):} Find the asymptotic normal distribution of
+\(\ln(Y_n)\).
+
+\hypertarget{problem-3}{%
+\subsection{Problem 3}\label{problem-3}}
+
+Let \(W_i\) be the weight of the \(i\)th airline passenger's luggage.
+Assume that the weights are independent, each with pdf
+\(f(w) = \theta B^{-\theta} w^{\theta-1}, 0 < w < B, \quad 0 \quad o.w.\)
+
+\textbf{Part (a):} For \(n = 100, \theta = 3, B = 80\), approximate
+\(P\left[\sum_{i = 1}^{100} W_i > 6025\right]\)
+
+\begin{quote}
+By the CLT, we know that \(\sum W_i\) is approximately distributed
+normally with parameters N(n\mu, n \sigma\^{}2). Using an online
+integral calculator, I calculated \(E(W_i)\) to be 60 and \(Var(W_i)\)
+to be 240. Thus, this sum is approximated as follows: \$\sum\_\{i =
+1\}\^{}\{n\}
+\end{quote}
+
+\textbf{Part (b):} If W\_\{1:n\} is the smallest value of n,
+
+\hypertarget{problem-4}{%
+\subsection{Problem 4}\label{problem-4}}
+
+\end{document}

@@ -1,0 +1,204 @@
+---
+title: "BIOSTAT 704 - Theorems for Exam 1"
+output:
+  html_document:
+    code_folding: hide
+    theme: readable
+---
+
+```{r message=FALSE, warning=FALSE}
+library(knitr)
+opts_chunk$set(warning = FALSE, message = FALSE, fig.align = 'center', fig.width = 6, echo = FALSE)
+```
+
+# {.tabset .tabset-fade .tabset-pills}
+
+## Chapter 7
+
+### {.tabset .tabset-fade .tabset-pills}
+
+#### Convergence
+
+```{r}
+knitr::include_graphics("U:/austin_allen/documents/temp_downloads/theorems1.png")
+```
+
+
+```{r}
+knitr::include_graphics("U:/austin_allen/documents/temp_downloads/p2.png")
+```
+
+
+
+
+```{r}
+knitr::include_graphics("U:/austin_allen/documents/temp_downloads/p3.png")
+```
+
+
+```{r}
+knitr::include_graphics("U:/austin_allen/documents/temp_downloads/p4.png")
+```
+
+
+#### CLT 
+
+```{r}
+knitr::include_graphics("U:/austin_allen/documents/temp_downloads/p5.png")
+```
+
+
+```{r}
+knitr::include_graphics("U:/austin_allen/documents/temp_downloads/p6.png")
+```
+
+```{r}
+knitr::include_graphics("U:/austin_allen/documents/temp_downloads/p7.png")
+```
+
+
+
+
+
+
+```{r}
+knitr::include_graphics("U:/austin_allen/documents/temp_downloads/p8.png")
+```
+
+
+```{r}
+knitr::include_graphics("U:/austin_allen/documents/temp_downloads/p9.png")
+```
+
+
+#### Stochastic Convergence/Chebychev
+
+```{r}
+knitr::include_graphics("U:/austin_allen/documents/temp_downloads/p10.png")
+```
+
+```{r}
+knitr::include_graphics("U:/austin_allen/documents/temp_downloads/p11.png")
+```
+
+
+```{r}
+knitr::include_graphics("U:/austin_allen/documents/temp_downloads/p12.png")
+```
+
+
+#### WLLN/Prob Converge
+
+```{r}
+knitr::include_graphics("U:/austin_allen/documents/temp_downloads/p13.png")
+```
+
+
+
+```{r}
+knitr::include_graphics("U:/austin_allen/documents/temp_downloads/p14.png")
+```
+
+```{r}
+knitr::include_graphics("U:/austin_allen/documents/temp_downloads/p15.png")
+```
+
+
+```{r}
+knitr::include_graphics("U:/austin_allen/documents/temp_downloads/p16.png")
+```
+
+
+
+#### Additional Theorems
+
+```{r}
+knitr::include_graphics("U:/austin_allen/documents/temp_downloads/p17.png")
+```
+
+
+
+```{r}
+knitr::include_graphics("U:/austin_allen/documents/temp_downloads/p18.png")
+```
+
+```{r}
+knitr::include_graphics("U:/austin_allen/documents/temp_downloads/p19.png")
+```
+
+
+#### Hints
+
+```{r}
+knitr::include_graphics("U:/austin_allen/documents/temp_downloads/p20.png")
+```
+
+
+## Chapter 8
+
+### {.tabset .tabset-fade .tabset-pills}
+
+#### Statistic/E(S)/Normal Sum
+
+```{r}
+knitr::include_graphics("U:/austin_allen/documents/temp_downloads/k1.png")
+```
+
+
+
+```{r}
+knitr::include_graphics("U:/austin_allen/documents/temp_downloads/k2.png")
+```
+
+```{r}
+knitr::include_graphics("U:/austin_allen/documents/temp_downloads/k3.png")
+```
+
+#### Chi-square/Gamma/Some Normal
+
+```{r}
+knitr::include_graphics("U:/austin_allen/documents/temp_downloads/k4.png")
+```
+
+
+
+```{r}
+knitr::include_graphics("U:/austin_allen/documents/temp_downloads/k5.png")
+```
+
+```{r}
+knitr::include_graphics("U:/austin_allen/documents/temp_downloads/k6.png")
+```
+
+#### $t, F, \beta$
+
+
+
+```{r}
+knitr::include_graphics("U:/austin_allen/documents/temp_downloads/k7.png")
+```
+
+
+
+```{r}
+knitr::include_graphics("U:/austin_allen/documents/temp_downloads/k8.png")
+```
+
+
+
+```{r}
+knitr::include_graphics("U:/austin_allen/documents/temp_downloads/k9.png")
+```
+
+```{r}
+knitr::include_graphics("U:/austin_allen/documents/temp_downloads/k10.png")
+```
+
+#### Table of Distributions
+
+```{r}
+knitr::include_graphics("U:/austin_allen/documents/temp_downloads/k11.png")
+```
+
+
+

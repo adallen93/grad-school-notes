@@ -1,0 +1,121 @@
+---
+title: "BIOSTAT 706 - Midterm Project"
+author: "Austin Allen"
+---
+
+```{r}
+library(tidyverse)
+```
+
+
+```{r}
+dat <- read.csv("../BIOS706_final_exam_CLHLS.csv")
+
+num_na <- as.data.frame(colSums(is.na(dat))) %>% rename(na = 1)
+var_names <- colnames(dat)
+
+
+
+df <- dat %>% 
+  mutate(height = ifelse(height == 999, NA, height),
+         weight = ifelse(weight == 999, NA, weight)) %>% 
+  select(ID, dbp, sbp, hypertension, sex, smoking,  age, height, weight, health, VD3) %>% 
+  na.omit() 
+
+df <- df %>% 
+  mutate(bmi = weight/((height/100)^2)) %>% 
+  filter(weight <= mean(df$weight) + 3*sd(df$weight) & weight >= mean(df$weight) - 3*sd(df$weight)) %>% 
+  filter(height <= mean(df$height) + 3*sd(df$height) & height >= mean(df$height) - 3*sd(df$height))
+
+my_lm <- lm(VD3 ~ sbp + sex + smoking + age + health + bmi, data = df)
+
+summary(my_lm)
+
+```
+
+```{r}
+# Numbers for consort diagram
+n_full <- nrow(dat) 
+n_na <- nrow(dat) - 878
+n_outliers <- 878 - nrow(df)
+
+```
+
+```{r eval = FALSE}
+# Create Table 1
+library(table1)
+
+tab1df <- df %>% rename(DBP = dbp, SBP = sbp, Hypertension = hypertension, Sex = sex, Health = health, Smoking = smoking, Age= age, BMI = bmi) %>% select(DBP, SBP, Hypertension, Sex, Health, Smoking, Age, BMI, VD3)
+# Assuming your data is stored in a data frame named 'df'
+
+# Specify the categorical and continuous variables
+cat_vars <- c("Sex", "Smoking", "Hypertension", "Health")
+cont_vars <- c("Age", "BMI", "VD3")
+
+# Create the table using the formula interface
+table1(
+  ~ .,  # Formula includes all variables separated by "+"
+  data = tab1df,  # Specify the data frame
+  cat.varlist = cat_vars,  # List of categorical variables
+  cont.varlist = cont_vars  # List of continuous variables
+)
+
+
+```
+
+
+
+
+
+```{r}
+dat %>% 
+  ggplot(aes(x = meat, y = VD3, group = meat)) +
+  geom_boxplot()
+```
+
+
+
+
+
+
+
+
+
+
+
+
+```{r eval = FALSE}
+full_model <- lm(VD3 ~ ., data = df[c(pred, "VD3")])
+# preds <- paste(pred, collapse = " + ")
+# frm <- paste("VD3 ~", preds)
+# fm <- lm.step(frm, data = df)
+
+step_model <- stepAIC(full_model, data = df[c(pred, "VD3")])
+
+
+df["ID"] %>% unique() %>% nrow(
+  
+)
+```
+
+
+
+
+
+
+
+
+
+
+### Dealing with Missing Data
+
+From the get-go, it's easy to see that we're dealing with large amounts of missing data. Here's the breakdown of what's missing:
+
+
+
+
+### Results 
+
+
+
+

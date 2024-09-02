@@ -1,0 +1,49 @@
+---
+title: "Analyzing Strenthsquest Results of Duke's Class of 2025 MB Cohort"
+author: "Austin Allen"
+output:
+  html_document:
+    theme: readable
+    code_folding: TRUE
+---
+
+
+```{r}
+library(tidyverse)
+library(knitr)
+library(pander)
+opts_chunk$set(warning = FALSE, message = FALSE, fig.align = 'center', fig.width = 4, fig.height = 3)
+```
+
+
+
+
+```{r}
+categories <- read.csv("categories.csv")
+strengths <- read.csv("strengths.csv") %>% 
+  select((1:9)) %>% 
+  filter(last_name != "") %>% 
+  pivot_longer(cols = starts_with("strength"), names_to = "rank", values_to = "strength") %>% 
+  unite("name",first_name:last_name, sep = " ") 
+
+strengths %>% 
+  group_by(strength) %>% 
+  summarise(count = n()) %>% 
+  arrange(count) %>% 
+  mutate(strength = fct_reorder(strength, count)) 
+
+ggplot(strengths) +
+  geom_bar(aes(x = strength))
+
+
+```
+
+
+
+
+
+
+
+
+
+

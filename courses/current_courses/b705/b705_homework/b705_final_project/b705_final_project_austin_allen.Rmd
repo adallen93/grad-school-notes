@@ -1,0 +1,170 @@
+---
+title: "BIOSTAT 705 Final Project - EDA, Data Cleaning and the ANCOVA Model"
+author: "Austin Allen"
+output:
+  pdf_document:
+    latex_engine: xelatex
+---
+
+```{r}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = TRUE, fig.align = 'center', fig.width = 4, fig.height = 3)
+```
+
+
+```{r message=FALSE, warning=FALSE}
+# Load libraries and set global options
+library(tidyverse)
+```
+
+|Activity Log| |
+|-----|---------------|
+|04/01/24|Downloaded data to home drive|
+|04/08/24|Created Document|
+
+
+
+```{r}
+# Load in data and dictionary
+dat <- read.csv("water_potability_A.csv")
+data_dictionary <- readxl::read_xlsx("data_dictionary_water.xlsx")
+```
+
+# 1 Intruduction and Overview
+
+This document is the quasi-SAP for my part in the final project for BIOSTAT 705. Our team's project description is to apply ANCOVA and Lasso/Ridge regression to predict pH and compare their performance using the `water_potability_A.csv` data file. My specific assignment is to clean the data, which involves exploratory data analysis and management of missing values and outliers, as well as to provide the ANCOVA model for the analysis. 
+
+
+### *1.1 Aims* 
+
+The specific aim for our group is to Lasso/Ridge regression to predict pH and compare their performance using the `water_potability_A.csv` data file. For this report, I am only going to focus on building the ANCOVA model.
+
+### *1.2 Study Hypotheses*
+
+### *1.2.1 Hypothesis for ANCOVA Model*
+
+$$
+H_0: \text{The mean pH of potable water for potability} \in \{0, 1\}\text{ is equal, adjusting for all other variables}
+$$
+$$
+H_A: \text{The mean pH of potable water for potability} \in \{0, 1\}\text{ is not equal, adjusting for all other variables}
+$$
+### *1.2.2 Hypotheses for LASSO and Ridge Regression*
+
+The null and alternative hypotheses for LASSO and Ridge Regression will be given elsewhere and are beyond the scope of this document. 
+
+
+
+# 2 Study Population
+
+### *2.1 Inclusion Criteria*
+
+The inclusion criteria for this study is 
+
+### *2.2 Exclusion Criteria*
+
+Before we dig into the data, we have to decide what to do about missing values and outliers. Since we are building an ANCOVA model to look at potability as a main predictor for pH with all other predictors adjusting for confounding, I recommend removing all missing values. However, if there is a variable other than potability or pH level that has significantly more missingness than other variables, I recommend excluding that variable from the study rather than sacrificing the sample size. 
+
+I also recommend excluding outliers. My definition for "outlier" will be any data point for any variable further from the sample mean than 4 standard deviations. 
+
+In addition to outliers and missing values, if there are any values that do not make plausible sense for the context (e.g. $\text{potability} = 2$, which would be outside the range of $\text{potability} \in \{0, 1\}$), I recommend treating this as a missing value and excluding. 
+
+
+
+
+# 3 3	Outcomes, Exposures, and Additional Variables of Interest
+
+
+### *3.1 Primary Outcome(s)*
+
+```{r echo = FALSE}
+outcome <- data_dictionary %>% filter(Variable == "pH value")
+
+pander::pander(outcome)
+```
+
+
+
+
+### *3.3 Additional Variables of Interest*
+
+This is optional but generally this would be all your covariates of interest. If there are any variables that need special calculations etc. include them here or in a data dictionary that is an appendix to this SAP which you can reference here. 
+
+```{r}
+covariates <- data_dictionary %>% filter(Variable != "pH value")
+
+pander::pander(covariates)
+```
+
+# 4	Statistical Analysis Plan
+
+### *4.1 Analysis Plan for Aim 1*
+
+I am going to build an ANCOVA model using pH as the primary outcome, potability as the primary factor, and all other variables in section 3.3 as covariates. Before conducting the analysis, I will check the following assumptions according to the corresponding description of the method for checking the assumption:
+
+1. All lines are equal in slope. 
+  - To check this assumption, I will first plot the model with all lines. This first check will be a visual check. If all slopes appear equal, we will verify this assumption by checking whether the interaction terms are significant
+2. There is a linear relationship between `pH` and all other covariates
+  - We will check this visually with residual plots
+3. Covariates are not correlated with potability
+4. Variance is homogenous 
+5. Residuals are normally distributed
+
+
+# 5 Results
+
+### *5.1 Results for Aim 1*
+
+
+```{r}
+library(gridExtra)
+
+get_summary_table <- function(var) {
+  summary(mosaic::favstats(dat[,var], na.rm = FALSE))
+}
+sum_tables <- lapply(colnames(dat), get_summary_table)
+
+grid_arrangement <- arrangeGrob(
+  grobs = lapply(sum_tables, tableGrob),
+  ncol = 4, nrow = 3
+)
+
+grid_arrangement
+
+# grid.newpage()
+# grid.draw(grid_arrangement)
+```
+
+
+
+
+
+
+# 6	Appendix
+
+### *6.1 Exploratory Data Analysis*
+
+Summaries for each of the variables in the raw dataset are below. 
+
+```{r}
+
+```
+
+
+
+### *6.2 Plots for Checking Analysis Assumptions*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

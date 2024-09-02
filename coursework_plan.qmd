@@ -1,6 +1,6 @@
 ---
 title: "Tentative Course Plan"
-date: "January 26, 2024"
+date: last-modified
 author: "Austin Allen"
 format:
   html:
@@ -91,13 +91,21 @@ execute:
 
 #### Top Considerations
 
+* BIOSTAT 707 (Statistical Methods for Learning and Discovery)
 * BIOSTAT 719 (Generalized Linear Models)
 * BIOSTAT 823 (Big Data Programming)
-* BIOSTAT 915 (High-Dimensional Statistics and Machine Learning)
 
 #### Additional Courses
 
-* BIOSTAT 707 (Statistical Methods for Learning and Discovery)
+
+
+* BIOSTAT 713 (Survival Analysis)
+* BIOSTAT 724 (Introduction to Applied Bayesian Analysis)
+* BIOSTAT 915 (High-Dimensional Statistics and Machine Learning)
+* MATH 561 (Numerical Linear Algebra, Optimization and Monte Carlo Simulation)
+* COMPSCI 671D (Theory and Algorithms for Machine Learning)
+
+
 
 
 #### Actual Courses Taken
@@ -113,13 +121,19 @@ execute:
 #### Top Considerations
 
 * BIOSTAT 718 (Longitudinal and Correlated Data Analysis)
-* CBB 561 (Computational Sequence Biology)
 * BIOSTAT 724 (Introduction to Applied Bayesian Analysis)
 
 #### Additional Courses
 
-* BIOSTAT 903 (Advanced Survival Analysis)
+* BIOSTAT 709 (Observational Studies)
 * BIOSTAT 824 (Case Studies in Biomedical Data Science)
+* BME 590 (Special Topics in Biomedical Engineering, Spatial Omics with John Hickey)
+* CBB 561 (Computational Sequence Biology)
+* BIOSTAT 903 (Advanced Survival Analysis)
+* SPANISH 204 (Advanced Intermediate Spanish-Audit Only)
+* BIOLOGY 325 (Current Technologies in Genomics and Precision Medicine)
+* BIOLOGY 417S (Genetic Engineering and Biotechnology)
+
 
 
 #### Actual Courses Taken

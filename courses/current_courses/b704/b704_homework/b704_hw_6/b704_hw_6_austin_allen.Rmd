@@ -1,0 +1,72 @@
+---
+title: "BIOSTAT 704 - Homework 6"
+author: "Austin Allen"
+output:
+  pdf_document:
+    latex_engine: xelatex
+---
+
+### Problem 1
+
+**BE Exercise 10.5**
+
+Let $X_1, ..., X_n$ be a random sample from a gamma distribution, $X_i \sim GAM(\theta, 2)$. Show that $S = \sum_{i = 1}^n X-i$ is sufficient for $\theta$
+
+**Part (a):** by using equation (10.2.1)
+
+**Part (b):** by the factorization criterion of equation (10.2.3)
+
+**BE Exercise 10.7**
+
+Let $X_1, ..., X_n$ be independent with $X_i \sim NB(r_i, p)$. Find a sufficient statistic for p. 
+
+**BE Exercise 10.16**
+
+For the random variables $X_1, ..., X_n$ in exercise 6, find the MLE of p by maximizing the pdf of the sufficient statistic. Is this the same as the usual MLE? Explain why this result is expected.
+
+\newpage
+
+### Problem 2
+
+**BE Exercise 10.11**
+
+Consider a random sample of size n from a uniform distribution, $X_i \sim UNIF(\theta_1, \theta_2)$. 
+
+**Part (a):** Show that $X_{1:n}$ is a sufficient statistic for $\theta_1$ if $\theta_2$ is known. 
+
+**Part (b):** Show that $X_{1:n}$ and $X_{n:n}$ are jointly sufficient for $\theta_1$ and $\theta_2$. 
+
+**BE Exercise 10.12**
+
+Let $X_1,...,X_n$ be a random sample from a two parameter exponential distribution, $X_i \sim EXP(\theta, \eta)$. Show that $X_{1:n}$ and $\bar{X_n}$ are jointly sufficient for $\theta$ and $\eta$. 
+
+**BE Exercise 10.20**
+
+Show that the following families of distributions belong to the regular exponential class, and for each cae use this information to find complete sufficient statistics based on a random sample $X_1,...,X_n$. 
+
+**Part (a):** $BIN(1, p); 0 , p < 1$
+**Part (b):** $POI(\mu); \mu > 0$
+**Part (c):** $NB(r, p); r \text{ known,} 0 < p < 1$ 
+**Part (d):** $N(\mu, \sigma^2); -\infty < \mu < \infty, \sigma^2 > 0$
+**Part (e):** $EXP(\theta); \theta > 0$
+**Part (f):** $GAM(\theta, \kappa); \theta > 0, \kappa > 0$
+**Part (g):** $BETA(\theta_1, \theta_2); \theta_1 > 0, \theta_2 > 0$
+**Part (h):** $WEI(\theta, \beta); \beta \text{ known, } \theta > 0$
+
+**BE Exercise 10.25**
+
+Consider a random sample of size n from a distribution with pdf $f(x;\theta) = \theta x^{\theta - 1}$ if $0 < x < 1$ and zero otherwise; $\theta > 0$. 
+
+**Part (a):** Find the UMBUE of $1/\theta$. *Hint*: $E[-lnX] = 1/\theta$.
+
+**Part (b):** Find the UMVUE of $\theta$. 
+
+\newpage
+
+### Problem 3
+
+Let $X_1, ..., X_n$ be a random sample from the Normal distribution $N(\theta, 1).
+
+**Part (a):** Find a complete and sufficient statistic for $\theta$. 
+
+**Part (b):** Show that $\bar{X_n^2} - \frac{1}{n}$ is a UMVUE for $\theta^2$. 
